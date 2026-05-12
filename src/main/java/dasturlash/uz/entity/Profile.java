@@ -27,8 +27,10 @@ public class Profile {
     @Column
     private String email;
     @Column
+    @Enumerated(EnumType.STRING)
     private Status status;
     @Column
+    @Enumerated(EnumType.STRING)
     private Visible visible;
     @Column
     @CreationTimestamp

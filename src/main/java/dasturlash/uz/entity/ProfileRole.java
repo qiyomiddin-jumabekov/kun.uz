@@ -16,6 +16,7 @@ public class ProfileRole {
     @JoinColumn(name = "profile_id")
     private Profile profile;
     @Column
+    @Enumerated(EnumType.STRING)
     private ProfileRoles role;
 
 }
