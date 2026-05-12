@@ -3,10 +3,12 @@ package dasturlash.uz.controller;
 import dasturlash.uz.dto.RequestDtoForUpdateProfile;
 import dasturlash.uz.dto.RequestDtoUpdateProfileByDetails;
 import dasturlash.uz.entity.Profile;
+import dasturlash.uz.projections.StudentShortInfo;
 import dasturlash.uz.service.ProfileService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -37,5 +39,12 @@ public class ProfileController {
             @PathVariable Integer id,
             @RequestBody RequestDtoUpdateProfileByDetails request) {
         return ResponseEntity.ok().body(profileService.updateProfileByDetails(id, request));
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<Page<StudentShortInfo>> getAllProfiles(
+            @RequestParam("page") int page,
+            @RequestParam("size") int size) {
+        return ResponseEntity.ok().body(profileService.getAllProfilesByPagination(page, size));
     }
 }
