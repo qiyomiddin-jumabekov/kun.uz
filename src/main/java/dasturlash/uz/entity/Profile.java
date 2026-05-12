@@ -25,13 +25,11 @@ public class Profile {
     @Column
     private String password;
     @Column
-    private String email;
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.ACTIVE;
     @Column
     @Enumerated(EnumType.STRING)
-    private Status status;
-    @Column
-    @Enumerated(EnumType.STRING)
-    private Visible visible;
+    private Visible visible = Visible.ACTIVE;
     @Column
     @CreationTimestamp
     private LocalDateTime createdAt;
