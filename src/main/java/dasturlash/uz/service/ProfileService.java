@@ -3,6 +3,7 @@ package dasturlash.uz.service;
 import dasturlash.uz.dto.RequestDtoForUpdateProfile;
 import dasturlash.uz.dto.RequestDtoUpdateProfileByDetails;
 import dasturlash.uz.entity.Profile;
+import dasturlash.uz.enums.Visible;
 import dasturlash.uz.projections.StudentShortInfo;
 import dasturlash.uz.repository.ProfileRepository;
 import jakarta.validation.Valid;
@@ -22,8 +23,7 @@ public class ProfileService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Profile getProfileById(Integer id) {
-        return profileRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Profile with id " + id + " not found"));
+        return profileRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Profile with id " + id + " not found"));
     }
 
     public Profile updateProfile(Integer id, @Valid RequestDtoForUpdateProfile request) {
@@ -56,5 +56,12 @@ public class ProfileService {
     public Page<StudentShortInfo> getAllProfilesByPagination(int page, int size) {
         Pageable pageable = PageRequest.of(page - 1, size);
         return profileRepository.getAllProfilesByPagination(pageable);
+    }
+
+    public String deleteProfileById(Integer id) {
+        Profile profile = getProfileById(id);
+        profile.setVisible(Visible.INACTIVE);
+        profileRepository.save(profile);
+        return "Profile with id " + id + " has been deleted";
     }
 }

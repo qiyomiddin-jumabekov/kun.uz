@@ -22,3 +22,6 @@ Content-Type: application/json
 
 ### Get all profiles by Pagination
 GET localhost:8080/profile/list?page=2&size=3
+
+### Delete Profile By Id
+DELETE localhost:8080/profile?id=1

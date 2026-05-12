@@ -17,6 +17,7 @@ public interface ProfileRepository extends CrudRepository<Profile, Integer> {
             " p.name as profName," +
             " p.surname as profSurname," +
             " p.status as profStatus" +
-            " from Profile p")
+            " from Profile p" +
+            " where p.visible = dasturlash.uz.enums.Visible.ACTIVE")
     public Page<StudentShortInfo> getAllProfilesByPagination(Pageable page);
 }

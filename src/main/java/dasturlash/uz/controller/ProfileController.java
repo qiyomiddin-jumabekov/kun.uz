@@ -47,4 +47,10 @@ public class ProfileController {
             @RequestParam("size") int size) {
         return ResponseEntity.ok().body(profileService.getAllProfilesByPagination(page, size));
     }
+
+    @DeleteMapping("")
+    public ResponseEntity<String> deleteProfile(
+            @RequestParam("id") Integer id) {
+        return ResponseEntity.ok().body(profileService.deleteProfileById(id));
+    }
 }
