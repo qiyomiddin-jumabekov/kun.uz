@@ -1,2 +1,13 @@
 ### Get Profile By Id
 GET localhost:8080/profile/by-id/1
+
+### Update profile
+PUT localhost:8080/profile?id=1
+Content-Type: application/json
+
+{
+  "username": "AlijonBek",
+  "password": "123",
+  "name": "Alijon",
+  "surname": "Alijonov"
+}
