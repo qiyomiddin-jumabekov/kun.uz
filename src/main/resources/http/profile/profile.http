@@ -1,0 +1,2 @@
+### Get Profile By Id
+GET localhost:8080/profile/by-id/1
