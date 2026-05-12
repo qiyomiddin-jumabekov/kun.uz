@@ -4,6 +4,8 @@ import dasturlash.uz.enums.ProfileRoles;
 import jakarta.persistence.*;
 
 @Entity
+@Getter
+@Setter
 public class ProfileRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
