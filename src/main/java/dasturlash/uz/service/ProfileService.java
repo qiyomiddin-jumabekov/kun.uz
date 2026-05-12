@@ -1,6 +1,7 @@
 package dasturlash.uz.service;
 
 import dasturlash.uz.dto.RequestDtoForUpdateProfile;
+import dasturlash.uz.dto.RequestDtoUpdateProfileByDetails;
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.repository.ProfileRepository;
 import jakarta.validation.Valid;
@@ -31,6 +32,23 @@ public class ProfileService {
         oldProfile.setName(request.name());
         oldProfile.setPassword(bCryptPasswordEncoder.encode(request.password()));
         oldProfile.setUsername(request.username());
+        return profileRepository.save(oldProfile);
+    }
+
+    public Profile updateProfileByDetails(Integer id, RequestDtoUpdateProfileByDetails request) {
+        Profile oldProfile = getProfileById(id);
+        if (request.name() != null && !request.name().isBlank()) {
+            oldProfile.setName(request.name());
+        }
+        if (request.surname() != null && !request.surname().isBlank()) {
+            oldProfile.setSurname(request.surname());
+        }
+        if (request.password() != null && !request.password().isBlank()) {
+            oldProfile.setPassword(bCryptPasswordEncoder.encode(request.password()));
+        }
+        if (request.username() != null && !request.username().isBlank()) {
+            oldProfile.setUsername(request.username());
+        }
         return profileRepository.save(oldProfile);
     }
 }

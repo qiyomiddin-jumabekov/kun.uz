@@ -11,3 +11,11 @@ Content-Type: application/json
   "name": "Alijon",
   "surname": "Alijonov"
 }
+
+### Update Profile By Details
+PUT localhost:8080/profile/update-detail/1
+Content-Type: application/json
+
+{
+  "name": "Alijon"
+}

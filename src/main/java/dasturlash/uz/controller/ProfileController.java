@@ -1,6 +1,7 @@
 package dasturlash.uz.controller;
 
 import dasturlash.uz.dto.RequestDtoForUpdateProfile;
+import dasturlash.uz.dto.RequestDtoUpdateProfileByDetails;
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.service.ProfileService;
 import jakarta.validation.Valid;
@@ -29,5 +30,12 @@ public class ProfileController {
             @RequestParam("id") Integer id,
             @RequestBody @Valid RequestDtoForUpdateProfile request) {
         return ResponseEntity.ok().body(profileService.updateProfile(id, request));
+    }
+
+    @PutMapping("/update-detail/{id}")
+    public ResponseEntity<Profile> updateProfileByProfileDetails(
+            @PathVariable Integer id,
+            @RequestBody RequestDtoUpdateProfileByDetails request) {
+        return ResponseEntity.ok().body(profileService.updateProfileByDetails(id, request));
     }
 }
