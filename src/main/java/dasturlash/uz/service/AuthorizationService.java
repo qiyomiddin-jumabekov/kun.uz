@@ -1,6 +1,6 @@
 package dasturlash.uz.service;
 
-import dasturlash.uz.dto.RequestDtoForProfileRegister;
+import dasturlash.uz.dto.RequestDtoForProfile;
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class AuthorizationService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    public ResponseEntity<String> registerUser(RequestDtoForProfileRegister request) {
+    public ResponseEntity<String> registerUser(RequestDtoForProfile request) {
         if (profileRepository.existsByUsername(request.username())) {
             return ResponseEntity.badRequest().body("Username already exists");
         }

@@ -1,6 +1,6 @@
 package dasturlash.uz.service;
 
-import dasturlash.uz.dto.RequestDtoForUpdateProfile;
+import dasturlash.uz.dto.RequestDtoForProfile;
 import dasturlash.uz.dto.RequestDtoUpdateProfileByDetails;
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.enums.Visible;
@@ -26,7 +26,7 @@ public class ProfileService {
         return profileRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Profile with id " + id + " not found"));
     }
 
-    public Profile updateProfile(Integer id, @Valid RequestDtoForUpdateProfile request) {
+    public Profile updateProfile(Integer id, @Valid RequestDtoForProfile request) {
         Profile oldProfile = getProfileById(id);
 
         oldProfile.setSurname(request.surname());

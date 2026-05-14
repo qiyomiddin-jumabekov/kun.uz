@@ -1,9 +1,8 @@
 package dasturlash.uz.controller;
 
-import dasturlash.uz.dto.RequestDtoForProfileRegister;
+import dasturlash.uz.dto.RequestDtoForProfile;
 import dasturlash.uz.service.AuthorizationService;
 import jakarta.validation.Valid;
-import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +19,7 @@ public class Authorization {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody @Valid RequestDtoForProfileRegister request) {
+    public ResponseEntity<String> registerUser(@RequestBody @Valid RequestDtoForProfile request) {
         return authorizationService.registerUser(request);
     }
 }

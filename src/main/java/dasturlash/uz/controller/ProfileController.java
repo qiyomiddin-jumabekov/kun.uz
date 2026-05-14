@@ -1,6 +1,6 @@
 package dasturlash.uz.controller;
 
-import dasturlash.uz.dto.RequestDtoForUpdateProfile;
+import dasturlash.uz.dto.RequestDtoForProfile;
 import dasturlash.uz.dto.RequestDtoUpdateProfileByDetails;
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.projections.StudentShortInfo;
@@ -30,7 +30,7 @@ public class ProfileController {
     @PutMapping("")
     public ResponseEntity<Profile> updateProfile(
             @RequestParam("id") Integer id,
-            @RequestBody @Valid RequestDtoForUpdateProfile request) {
+            @RequestBody @Valid RequestDtoForProfile request) {
         return ResponseEntity.ok().body(profileService.updateProfile(id, request));
     }
 
