@@ -4,7 +4,7 @@ import dasturlash.uz.dto.RequestDtoForProfile;
 import dasturlash.uz.dto.RequestDtoUpdateProfileByDetails;
 import dasturlash.uz.dto.RequestForUpdatePassword;
 import dasturlash.uz.entity.Profile;
-import dasturlash.uz.projections.StudentShortInfo;
+import dasturlash.uz.projections.ProfileShortInfo;
 import dasturlash.uz.service.ProfileService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -43,7 +43,7 @@ public class ProfileController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Page<StudentShortInfo>> getAllProfiles(
+    public ResponseEntity<Page<ProfileShortInfo>> getAllProfiles(
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
         return ResponseEntity.ok().body(profileService.getAllProfilesByPagination(page, size));
@@ -60,5 +60,13 @@ public class ProfileController {
             @PathVariable Integer id,
             @RequestBody RequestForUpdatePassword request) {
         return ResponseEntity.ok().body(profileService.updatePassword(id, request));
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<Page<ProfileShortInfo>> getAllProfilesByFilter(
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "5") int size,
+            @RequestParam(value = "query", required = false) String query) {
+        return ResponseEntity.ok().body(profileService.getProfilesByFilter(page, size, query));
     }
 }

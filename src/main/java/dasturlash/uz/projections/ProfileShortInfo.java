@@ -2,7 +2,7 @@ package dasturlash.uz.projections;
 
 import dasturlash.uz.enums.Status;
 
-public interface StudentShortInfo {
+public interface ProfileShortInfo {
     Integer getProfId();
 
     String getProfName();

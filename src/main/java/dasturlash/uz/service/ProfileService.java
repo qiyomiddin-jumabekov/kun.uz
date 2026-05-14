@@ -5,7 +5,7 @@ import dasturlash.uz.dto.RequestDtoUpdateProfileByDetails;
 import dasturlash.uz.dto.RequestForUpdatePassword;
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.enums.Visible;
-import dasturlash.uz.projections.StudentShortInfo;
+import dasturlash.uz.projections.ProfileShortInfo;
 import dasturlash.uz.repository.ProfileRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,7 @@ public class ProfileService {
         return profileRepository.save(oldProfile);
     }
 
-    public Page<StudentShortInfo> getAllProfilesByPagination(int page, int size) {
+    public Page<ProfileShortInfo> getAllProfilesByPagination(int page, int size) {
         Pageable pageable = PageRequest.of(page - 1, size);
         return profileRepository.getAllProfilesByPagination(pageable);
     }
@@ -75,5 +75,10 @@ public class ProfileService {
             return "Profile with id " + profileId + " has been updated";
         }
         throw new IllegalArgumentException("Passwords do not match");
+    }
+
+    public Page<ProfileShortInfo> getProfilesByFilter(int page, int size, String query) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        return profileRepository.getProfilesByFilter(pageable, query);
     }
 }
