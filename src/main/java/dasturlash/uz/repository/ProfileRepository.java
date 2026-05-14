@@ -4,11 +4,11 @@ import dasturlash.uz.entity.Profile;
 import dasturlash.uz.projections.ProfileShortInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-public interface ProfileRepository extends CrudRepository<Profile, Integer> {
+public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 
 
     boolean existsByUsername(String username);

@@ -1,4 +1,4 @@
-package dasturlash.uz.dto;
+package dasturlash.uz.dto.profile;
 
 public record RequestForUpdatePassword(
         String oldPassword,

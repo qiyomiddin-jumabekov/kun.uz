@@ -1,8 +1,8 @@
 package dasturlash.uz.controller;
 
-import dasturlash.uz.dto.RequestDtoForProfile;
-import dasturlash.uz.dto.RequestDtoUpdateProfileByDetails;
-import dasturlash.uz.dto.RequestForUpdatePassword;
+import dasturlash.uz.dto.profile.RequestDtoForProfile;
+import dasturlash.uz.dto.profile.RequestDtoUpdateProfileByDetails;
+import dasturlash.uz.dto.profile.RequestForUpdatePassword;
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.projections.ProfileShortInfo;
 import dasturlash.uz.service.ProfileService;

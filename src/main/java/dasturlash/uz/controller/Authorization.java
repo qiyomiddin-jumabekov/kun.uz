@@ -1,6 +1,6 @@
 package dasturlash.uz.controller;
 
-import dasturlash.uz.dto.RequestDtoForProfile;
+import dasturlash.uz.dto.profile.RequestDtoForProfile;
 import dasturlash.uz.service.AuthorizationService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

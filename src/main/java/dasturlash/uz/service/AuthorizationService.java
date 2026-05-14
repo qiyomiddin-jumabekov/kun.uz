@@ -1,6 +1,6 @@
 package dasturlash.uz.service;
 
-import dasturlash.uz.dto.RequestDtoForProfile;
+import dasturlash.uz.dto.profile.RequestDtoForProfile;
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
