@@ -24,4 +24,20 @@ public class SectionService {
         sectionRepository.save(section);
         return "Section succesfully added";
     }
+
+    public String updateSectionById(Integer id, RequestForSection request) {
+        Section section = getSectionById(id);
+        section.setNameRu(request.nameRu());
+        section.setNameEn(request.nameEn());
+        section.setNameUz(request.nameUz());
+        section.setOrderNumber(request.orderNumber());
+        section.setKey(request.key());
+        sectionRepository.save(section);
+        return "Section succesfully updated";
+    }
+
+
+    public Section getSectionById(Integer id) {
+        return sectionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Section not found"));
+    }
 }

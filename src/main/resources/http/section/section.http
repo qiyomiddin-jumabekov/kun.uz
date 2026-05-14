@@ -9,3 +9,15 @@ Content-Type: application/json
   "nameUz": "Dolzarb",
   "orderNumber": 1
 }
+
+### Update Section By Id
+PUT localhost:8080/section/1
+Content-Type: application/json
+
+{
+  "orderNumber": 2,
+  "nameUz": "Akademik",
+  "nameRu": "тувуштвуш",
+  "nameEn": "Academic",
+  "key": "Ac"
+}
