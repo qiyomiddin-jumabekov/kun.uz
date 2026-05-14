@@ -24,3 +24,6 @@ Content-Type: application/json
 
 ### Delete Region By Id
 DELETE localhost:8080/region/1
+
+### Get Regions By Pagination
+GET localhost:8080/region/list?page
