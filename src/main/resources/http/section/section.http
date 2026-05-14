@@ -21,3 +21,6 @@ Content-Type: application/json
   "nameEn": "Academic",
   "key": "Ac"
 }
+
+### Delete Section By Id
+DELETE localhost:8080/section/1
