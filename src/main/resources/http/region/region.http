@@ -1,0 +1,23 @@
+### Create Region
+POST localhost:8080/region
+Content-Type: application/json
+
+{
+  "key": "kk",
+  "nameEn": "Tashkent",
+  "nameRu": "Ташкент",
+  "nameUz": "Toshkent",
+  "orderNumber": 1
+}
+
+### Update Region By Id
+PUT localhost:8080/region/1
+Content-Type: application/json
+
+{
+  "orderNumber": 2,
+  "nameUz": "Buxoro",
+  "nameRu": "Бухарская",
+  "nameEn": "Bukhara",
+  "key": "RB"
+}

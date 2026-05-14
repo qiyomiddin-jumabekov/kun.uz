@@ -24,4 +24,19 @@ public class RegionService {
         regionRepository.save(region);
         return "Region successfully created";
     }
+
+    public String updateById(Integer regionId, RequestForRegion request) {
+        Region region = findById(regionId);
+        region.setOrderNumber(request.orderNumber());
+        region.setKey(request.key());
+        region.setNameUz(request.nameUz());
+        region.setNameRu(request.nameRu());
+        region.setNameEn(request.nameEn());
+        regionRepository.save(region);
+        return "Region successfully updated";
+    }
+
+    public Region findById(Integer id) {
+        return regionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Region not found"));
+    }
 }
