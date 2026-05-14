@@ -3,7 +3,7 @@ POST localhost:8080/region
 Content-Type: application/json
 
 {
-  "key": "kk",
+  "key": "ww",
   "nameEn": "Tashkent",
   "nameRu": "Ташкент",
   "nameUz": "Toshkent",
@@ -23,7 +23,11 @@ Content-Type: application/json
 }
 
 ### Delete Region By Id
-DELETE localhost:8080/region/1
+DELETE localhost:8080/region/8
 
 ### Get Regions By Pagination
-GET localhost:8080/region/list?page
+GET localhost:8080/region/list
+
+### Get Regions By Language
+GET localhost:8080/region/lang?page=1&size=3
+Accept-Language: ru

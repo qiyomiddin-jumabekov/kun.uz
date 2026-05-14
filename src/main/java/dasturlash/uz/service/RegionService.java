@@ -1,10 +1,11 @@
 package dasturlash.uz.service;
 
 import dasturlash.uz.dto.region.RequestForRegion;
+import dasturlash.uz.dto.region.ResponseDtoForRegionLang;
 import dasturlash.uz.entity.Region;
 import dasturlash.uz.enums.Visible;
+import dasturlash.uz.projections.ProjectionRegionLang;
 import dasturlash.uz.repository.RegionRepository;
-import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -55,5 +56,17 @@ public class RegionService {
     public Page<Region> getAllRegionsPagination(int page, int size) {
         Pageable pageable = PageRequest.of(page - 1, size);
         return regionRepository.findAll(pageable);
+    }
+
+    public Page<ResponseDtoForRegionLang> getRegionsByLang(String lang, int page, int size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        return regionRepository.getRegionsByLang(lang, Visible.ACTIVE, pageable)
+                .map(p -> {
+                    ResponseDtoForRegionLang dto = new ResponseDtoForRegionLang();
+                    dto.setId(p.getRegId());
+                    dto.setKey(p.getRegKey());
+                    dto.setName(p.getRegName());
+                    return dto;
+                });
     }
 }
