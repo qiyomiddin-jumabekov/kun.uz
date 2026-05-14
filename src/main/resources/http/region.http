@@ -1,0 +1,11 @@
+### Create Region
+POST localhost:8080/region
+Content-Type: application/json
+
+{
+  "key": "kk",
+  "nameEn": "Tashkent",
+  "nameRu": "Ташкент",
+  "nameUz": "Toshkent",
+  "orderNumber": 1
+}
