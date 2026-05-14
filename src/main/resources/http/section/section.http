@@ -1,0 +1,11 @@
+### Create Section
+POST localhost:8080/section
+Content-Type: application/json
+
+{
+  "key": "kk",
+  "nameEn": "Dalzarb",
+  "nameRu": "човутоу",
+  "nameUz": "Dolzarb",
+  "orderNumber": 1
+}
