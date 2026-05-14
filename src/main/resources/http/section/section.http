@@ -3,7 +3,7 @@ POST localhost:8080/section
 Content-Type: application/json
 
 {
-  "key": "kk",
+  "key": "fj",
   "nameEn": "Dalzarb",
   "nameRu": "човутоу",
   "nameUz": "Dolzarb",
@@ -24,3 +24,6 @@ Content-Type: application/json
 
 ### Delete Section By Id
 DELETE localhost:8080/section/1
+
+### Get Section List By Pagination
+GET localhost:8080/section/list?page=1&size=5

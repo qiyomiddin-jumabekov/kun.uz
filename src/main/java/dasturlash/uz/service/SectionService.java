@@ -3,9 +3,13 @@ package dasturlash.uz.service;
 import dasturlash.uz.dto.section.RequestForSection;
 import dasturlash.uz.entity.Section;
 import dasturlash.uz.enums.Visible;
+import dasturlash.uz.projections.section.SectionProjectionPagination;
 import dasturlash.uz.repository.SectionRepository;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -48,5 +52,10 @@ public class SectionService {
         section.setVisible(Visible.INACTIVE);
         sectionRepository.save(section);
         return "Section succesfully deleted";
+    }
+
+    public Page<SectionProjectionPagination> getSectionList(int page, int size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        return sectionRepository.findAllByVisible(Visible.ACTIVE, pageable);
     }
 }
