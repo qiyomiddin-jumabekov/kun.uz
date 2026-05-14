@@ -1,0 +1,33 @@
+### Create Category
+POST localhost:8080/category
+Content-Type: application/json
+
+{
+  "key": "вв",
+  "nameEn": "Uzbekistan",
+  "nameRu": "товсоуис",
+  "nameUz": "O'zbekiston",
+  "orderNumber": 1
+}
+
+### Update Category By Id
+PUT localhost:8080/category/1
+Content-Type: application/json
+
+{
+  "orderNumber": 2,
+  "nameUz": "Jahon",
+  "nameRu": "Jahan",
+  "nameEn": "World",
+  "key": "RB"
+}
+
+### Delete Category By Id
+DELETE localhost:8080/category/1
+
+### Get Categoruy By Pagination
+GET localhost:8080/category/list
+
+#### Get Categorys By Language
+GET localhost:8080/category/lang?page=1&size=3
+Accept-Language: uz

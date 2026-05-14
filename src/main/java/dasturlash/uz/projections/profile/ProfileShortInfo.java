@@ -1,4 +1,4 @@
-package dasturlash.uz.projections;
+package dasturlash.uz.projections.profile;
 
 import dasturlash.uz.enums.Status;
 

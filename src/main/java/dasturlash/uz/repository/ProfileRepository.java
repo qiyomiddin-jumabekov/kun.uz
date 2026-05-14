@@ -1,7 +1,7 @@
 package dasturlash.uz.repository;
 
 import dasturlash.uz.entity.Profile;
-import dasturlash.uz.projections.ProfileShortInfo;
+import dasturlash.uz.projections.profile.ProfileShortInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

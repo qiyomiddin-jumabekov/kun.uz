@@ -1,7 +1,8 @@
 package dasturlash.uz.repository;
 
-import dasturlash.uz.entity.Region;
+import dasturlash.uz.entity.Category;
 import dasturlash.uz.enums.Visible;
+import dasturlash.uz.projections.category.ProjectionCategoryLang;
 import dasturlash.uz.projections.region.ProjectionRegionLang;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,24 +11,21 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
-public interface RegionRepository extends CrudRepository<Region, Integer>,
-        PagingAndSortingRepository<Region, Integer> {
-
+public interface CategoryRepository extends CrudRepository<Category, Integer>,
+        PagingAndSortingRepository<Category, Integer> {
 
     boolean existsByKey(String key);
 
-
-
-    @Query("select r.id as regId, r.key as regKey," +
+    @Query("select c.id as catId, c.key as catKey," +
             " case :lang" +
-            " when 'uz' then r.nameUz" +
-            " when 'ru' then r.nameRu" +
-            " when 'en' then r.nameEn" +
-            " else r.nameUz" +
-            " end as regName" +
-            " from Region r" +
-            " where r.visible = :visible")
-    public Page<ProjectionRegionLang> getRegionsByLang(
+            " when 'uz' then c.nameUz" +
+            " when 'ru' then c.nameRu" +
+            " when 'en' then c.nameEn" +
+            " else c.nameUz" +
+            " end as catName" +
+            " from Category c" +
+            " where c.visible = :visible")
+    public Page<ProjectionCategoryLang> getCategoriesByLang(
             @Param("lang") String lang,
             @Param("visible") Visible visible,
             Pageable pageable);

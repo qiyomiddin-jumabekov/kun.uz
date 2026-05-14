@@ -4,7 +4,6 @@ import dasturlash.uz.dto.region.RequestForRegion;
 import dasturlash.uz.dto.region.ResponseDtoForRegionLang;
 import dasturlash.uz.entity.Region;
 import dasturlash.uz.enums.Visible;
-import dasturlash.uz.projections.ProjectionRegionLang;
 import dasturlash.uz.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

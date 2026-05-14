@@ -1,4 +1,4 @@
-package dasturlash.uz.projections;
+package dasturlash.uz.projections.region;
 
 public interface ProjectionRegionLang {
     Integer getRegId();

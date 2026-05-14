@@ -5,7 +5,7 @@ import dasturlash.uz.dto.profile.RequestDtoUpdateProfileByDetails;
 import dasturlash.uz.dto.profile.RequestForUpdatePassword;
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.enums.Visible;
-import dasturlash.uz.projections.ProfileShortInfo;
+import dasturlash.uz.projections.profile.ProfileShortInfo;
 import dasturlash.uz.repository.ProfileRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

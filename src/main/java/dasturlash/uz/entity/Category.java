@@ -27,7 +27,7 @@ public class Category {
     private String key;
     @Column
     @Enumerated(EnumType.STRING)
-    private Visible visible;
+    private Visible visible = Visible.ACTIVE;
     @Column(name = "created_date")
     @CreationTimestamp
     private LocalDateTime createdDate;
