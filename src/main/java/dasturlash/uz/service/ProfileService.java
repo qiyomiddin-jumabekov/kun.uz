@@ -2,6 +2,7 @@ package dasturlash.uz.service;
 
 import dasturlash.uz.dto.RequestDtoForProfile;
 import dasturlash.uz.dto.RequestDtoUpdateProfileByDetails;
+import dasturlash.uz.dto.RequestForUpdatePassword;
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.enums.Visible;
 import dasturlash.uz.projections.StudentShortInfo;
@@ -63,5 +64,16 @@ public class ProfileService {
         profile.setVisible(Visible.INACTIVE);
         profileRepository.save(profile);
         return "Profile with id " + id + " has been deleted";
+    }
+
+    public String updatePassword(Integer profileId, RequestForUpdatePassword request) {
+        Profile profile = getProfileById(profileId);
+        String oldPassword = profile.getPassword();
+        if (bCryptPasswordEncoder.matches(request.oldPassword(), oldPassword)) {
+            profile.setPassword(bCryptPasswordEncoder.encode(request.newPassword()));
+            profileRepository.save(profile);
+            return "Profile with id " + profileId + " has been updated";
+        }
+        throw new IllegalArgumentException("Passwords do not match");
     }
 }

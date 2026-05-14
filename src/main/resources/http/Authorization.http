@@ -3,8 +3,8 @@ POST localhost:8080/auth/register
 Content-Type: application/json
 
 {
-  "surname": "Qurbonov",
-  "name": "Shoxjahon",
-  "password": "333423",
-  "username": "qurbonov__"
+  "surname": "Azizov",
+  "name": "Aziz",
+  "password": "0000",
+  "username": "Znjnx"
 }

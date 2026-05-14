@@ -2,6 +2,7 @@ package dasturlash.uz.controller;
 
 import dasturlash.uz.dto.RequestDtoForProfile;
 import dasturlash.uz.dto.RequestDtoUpdateProfileByDetails;
+import dasturlash.uz.dto.RequestForUpdatePassword;
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.projections.StudentShortInfo;
 import dasturlash.uz.service.ProfileService;
@@ -52,5 +53,12 @@ public class ProfileController {
     public ResponseEntity<String> deleteProfile(
             @RequestParam("id") Integer id) {
         return ResponseEntity.ok().body(profileService.deleteProfileById(id));
+    }
+
+    @PutMapping("/password/{id}")
+    public ResponseEntity<String> changePassword(
+            @PathVariable Integer id,
+            @RequestBody RequestForUpdatePassword request) {
+        return ResponseEntity.ok().body(profileService.updatePassword(id, request));
     }
 }

@@ -25,3 +25,12 @@ GET localhost:8080/profile/list?page=1&size=3
 
 ### Delete Profile By Id
 DELETE localhost:8080/profile?id=1
+
+### Update Password
+PUT localhost:8080/profile/password/6
+Content-Type: application/json
+
+{
+  "oldPassword": "1111",
+  "newPassword": "0000"
+}
