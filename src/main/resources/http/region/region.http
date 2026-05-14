@@ -21,3 +21,6 @@ Content-Type: application/json
   "nameEn": "Bukhara",
   "key": "RB"
 }
+
+### Delete Region By Id
+DELETE localhost:8080/region/1

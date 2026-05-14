@@ -2,7 +2,9 @@ package dasturlash.uz.service;
 
 import dasturlash.uz.dto.region.RequestForRegion;
 import dasturlash.uz.entity.Region;
+import dasturlash.uz.enums.Visible;
 import dasturlash.uz.repository.RegionRepository;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +40,12 @@ public class RegionService {
 
     public Region findById(Integer id) {
         return regionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Region not found"));
+    }
+
+    public String deleteRegionById(Integer id) {
+        Region region = findById(id);
+        region.setVisible(Visible.INACTIVE);
+        regionRepository.save(region);
+        return "Region successfully deleted";
     }
 }
