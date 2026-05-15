@@ -1,6 +1,7 @@
 package dasturlash.uz.controller;
 
 import dasturlash.uz.dto.section.RequestForSection;
+import dasturlash.uz.projections.section.ResponseProjectionSession;
 import dasturlash.uz.projections.section.SectionProjectionPagination;
 import dasturlash.uz.service.SectionService;
 import jakarta.validation.Valid;
@@ -36,8 +37,16 @@ public class SectionController {
 
     @GetMapping("/list")
     public ResponseEntity<Page<SectionProjectionPagination>> getAllSections(
-            @RequestParam(value = "page",defaultValue = "1") int page,
-            @RequestParam(value = "size",defaultValue = "5") int size) {
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "5") int size) {
         return ResponseEntity.ok(sectionService.getSectionList(page, size));
+    }
+
+    @GetMapping("/lang")
+    public ResponseEntity<Page<ResponseProjectionSession>> getAllSectionsByLang(
+            @RequestParam(value = "page",defaultValue = "1") int page,
+            @RequestParam(value = "size",defaultValue = "5") int size,
+            @RequestHeader("Accept-Language") String lang) {
+        return ResponseEntity.ok(sectionService.getSectionsByLang(page, size, lang));
     }
 }

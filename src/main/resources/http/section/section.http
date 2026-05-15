@@ -3,10 +3,10 @@ POST localhost:8080/section
 Content-Type: application/json
 
 {
-  "key": "fj",
-  "nameEn": "Dalzarb",
-  "nameRu": "човутоу",
-  "nameUz": "Dolzarb",
+  "key": "xdjnd",
+  "nameEn": "EPIK",
+  "nameRu": "ткстакроско",
+  "nameUz": "Epik",
   "orderNumber": 1
 }
 
@@ -27,3 +27,7 @@ DELETE localhost:8080/section/1
 
 ### Get Section List By Pagination
 GET localhost:8080/section/list?page=1&size=5
+
+### Get Section List by Language
+GET localhost:8080/section/lang?page=1&size=5
+Accept-Language: ru

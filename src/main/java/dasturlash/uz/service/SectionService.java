@@ -3,6 +3,7 @@ package dasturlash.uz.service;
 import dasturlash.uz.dto.section.RequestForSection;
 import dasturlash.uz.entity.Section;
 import dasturlash.uz.enums.Visible;
+import dasturlash.uz.projections.section.ResponseProjectionSession;
 import dasturlash.uz.projections.section.SectionProjectionPagination;
 import dasturlash.uz.repository.SectionRepository;
 import jakarta.validation.constraints.Min;
@@ -57,5 +58,10 @@ public class SectionService {
     public Page<SectionProjectionPagination> getSectionList(int page, int size) {
         Pageable pageable = PageRequest.of(page - 1, size);
         return sectionRepository.findAllByVisible(Visible.ACTIVE, pageable);
+    }
+
+    public Page<ResponseProjectionSession> getSectionsByLang(int page, int size, String lang) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        return sectionRepository.getSectionsByLang(lang, pageable);
     }
 }
