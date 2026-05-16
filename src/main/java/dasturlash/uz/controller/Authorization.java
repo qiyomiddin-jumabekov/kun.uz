@@ -1,5 +1,7 @@
 package dasturlash.uz.controller;
 
+import dasturlash.uz.dto.auth.RequestForLogin;
+import dasturlash.uz.dto.auth.ResponseDtoForLogin;
 import dasturlash.uz.dto.profile.RequestDtoForProfile;
 import dasturlash.uz.service.AuthorizationService;
 import jakarta.validation.Valid;
@@ -22,4 +24,11 @@ public class Authorization {
     public ResponseEntity<String> registerUser(@RequestBody @Valid RequestDtoForProfile request) {
         return authorizationService.registerUser(request);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody @Valid RequestForLogin request) {
+        return ResponseEntity.ok(authorizationService.userLogin(request));
+    }
+
+
 }

@@ -31,4 +31,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
             " lower(p.surname) like lower(concat('%',:query,'%')) or " +
             " lower(p.username) like lower(concat('%',:query,'%')))")
     public Page<ProfileShortInfo> getProfilesByFilter(Pageable page, @Param("query") String query);
+
+
+    public Profile findByUsername(String username);
 }
