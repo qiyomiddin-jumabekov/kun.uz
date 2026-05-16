@@ -8,7 +8,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -44,8 +43,8 @@ public class SectionController {
 
     @GetMapping("/lang")
     public ResponseEntity<Page<ResponseProjectionSession>> getAllSectionsByLang(
-            @RequestParam(value = "page",defaultValue = "1") int page,
-            @RequestParam(value = "size",defaultValue = "5") int size,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "5") int size,
             @RequestHeader("Accept-Language") String lang) {
         return ResponseEntity.ok(sectionService.getSectionsByLang(page, size, lang));
     }
