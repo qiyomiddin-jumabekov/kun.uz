@@ -24,12 +24,14 @@ public class Profile {
     private String username;
     @Column
     private String password;
+    @Column(unique = true)
+    private String email;
     @Column
     @Enumerated(EnumType.STRING)
-    private Status status = Status.ACTIVE;
+    private Status status;
     @Column
     @Enumerated(EnumType.STRING)
-    private Visible visible = Visible.ACTIVE;
+    private Visible visible;
     @Column
     @CreationTimestamp
     private LocalDateTime createdAt;

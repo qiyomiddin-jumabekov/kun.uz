@@ -2,6 +2,7 @@ package dasturlash.uz.repository;
 
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.projections.profile.ProfileShortInfo;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -34,4 +35,9 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 
 
     public Profile findByUsername(String username);
+
+    public boolean existsByEmail(String email);
+
+    public Profile findByEmail(String email);
+
 }

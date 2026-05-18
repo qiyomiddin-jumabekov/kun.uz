@@ -6,7 +6,17 @@ Content-Type: application/json
   "surname": "Azizov",
   "name": "Aziz",
   "password": "0000",
-  "username": "Znjnx"
+  "username": "Znjnx",
+  "email": "qiyomiddinjumabekov1@gmail.com"
+}
+
+### Confirm Profile
+POST localhost:8080/auth/confirm
+Content-Type: application/json
+
+{
+  "email": "qiyomiddinjumabekov1@gmail.com",
+  "code": "98876"
 }
 
 ### Login Profile
