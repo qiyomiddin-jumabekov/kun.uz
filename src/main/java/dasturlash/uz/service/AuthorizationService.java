@@ -3,7 +3,6 @@ package dasturlash.uz.service;
 import dasturlash.uz.dto.auth.RequestForLogin;
 import dasturlash.uz.dto.auth.ResponseDtoForLogin;
 import dasturlash.uz.dto.profile.RequestDtoForProfile;
-import dasturlash.uz.dto.verification.EmailVerifyDto;
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.enums.Status;
 import dasturlash.uz.enums.Visible;
@@ -41,10 +40,9 @@ public class AuthorizationService {
         profile.setVisible(Visible.INACTIVE);
         profile.setStatus(Status.NOT_ACTIVE);
         profileRepository.save(profile);
-        boolean b = emailService.emailVerifyMethod(new EmailVerifyDto(
+        boolean b = emailService.emailVerifyMethod(
                 request.email(),
-                request.username()
-        ));
+                request.username());
         if (!b) {
             throw new IllegalArgumentException("Email verification failed");
         }

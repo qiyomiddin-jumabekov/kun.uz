@@ -16,8 +16,11 @@ Content-Type: application/json
 
 {
   "email": "qiyomiddinjumabekov1@gmail.com",
-  "code": "98876"
+  "code": "58887"
 }
+
+### Resent Code
+POST localhost:8080/auth/resent/qiyomiddinjumabekov1@gmail.com
 
 ### Login Profile
 POST localhost:8080/auth/login

@@ -1,0 +1,2 @@
+### Get History By email
+GET localhost:8080/email/by-email/qiyomiddinjumabekov1@gmail.com

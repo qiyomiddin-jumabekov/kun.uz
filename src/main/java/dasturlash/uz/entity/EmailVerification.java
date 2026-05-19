@@ -1,5 +1,6 @@
 package dasturlash.uz.entity;
 
+import dasturlash.uz.enums.CodeStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,4 +19,7 @@ public class EmailVerification {
     private String code;
     private LocalDateTime createdTime;
     private LocalDateTime expiredTime;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private CodeStatus codeStatus;
 }

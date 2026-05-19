@@ -1,10 +1,10 @@
 package dasturlash.uz.service;
 
 import dasturlash.uz.dto.verification.ConfirmDto;
-import dasturlash.uz.dto.verification.EmailVerifyDto;
 import dasturlash.uz.entity.EmailHistory;
 import dasturlash.uz.entity.EmailVerification;
 import dasturlash.uz.entity.Profile;
+import dasturlash.uz.enums.CodeStatus;
 import dasturlash.uz.enums.Status;
 import dasturlash.uz.enums.Visible;
 import dasturlash.uz.repository.EmailRepository;
@@ -61,23 +61,24 @@ public class EmailVerificationService {
         }
     }
 
-    public boolean emailVerifyMethod(EmailVerifyDto emailVerifyDto) {
+    public boolean emailVerifyMethod(String e, String username) {
         String code = String.valueOf((int) (Math.random() * 90000) + 10000);
-        boolean d = sendCode(emailVerifyDto.email(), code);
+        boolean d = sendCode(e, code);
         if (d) {
             EmailVerification email = new EmailVerification();
-            email.setEmail(emailVerifyDto.email());
+            email.setEmail(e);
             email.setCode(code);
-            email.setUsername(emailVerifyDto.username());
+            email.setUsername(username);
             email.setCreatedTime(LocalDateTime.now());
             email.setExpiredTime(LocalDateTime.now().plusMinutes(2));
+            email.setCodeStatus(CodeStatus.SEND);
             emailVerificationRepository.save(email);
 
             // For Email History
             EmailHistory history = new EmailHistory();
             history.setMessage("Code : " + code);
             history.setCreatedDate(LocalDateTime.now());
-            history.setEmail(emailVerifyDto.email());
+            history.setEmail(e);
             emailRepository.save(history);
             return true;
         }
@@ -100,8 +101,25 @@ public class EmailVerificationService {
             profile.setStatus(Status.ACTIVE);
             profile.setVisible(Visible.ACTIVE);
             profileRepository.save(profile);
+            emailVerificationRepository.updateCodeStatus(request.email(), CodeStatus.CONFIRMED);
             return "Confirm Success";
         }
-        return "Confirm Failed! Please try again";
+        emailVerificationRepository.updateCodeStatus(request.email(), CodeStatus.FAILED);
+        return "Confirm Failed Code or Email Is not Found! Please try again";
+    }
+
+    public String resentCode(String email) {
+        Profile profile = profileRepository.findByEmail(email);
+        if (profile == null) {
+            throw new IllegalArgumentException("Profile not found with email! Please register");
+        }
+        if (profile.getStatus() == Status.ACTIVE) {
+            throw new IllegalArgumentException("Profile is already active");
+        }
+        boolean b = emailVerifyMethod(email, profile.getUsername());
+        if (b) {
+            return "Code successfully resent";
+        }
+        throw new IllegalArgumentException("Email resent failed");
     }
 }
