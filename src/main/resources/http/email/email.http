@@ -3,3 +3,6 @@ GET localhost:8080/email/by-email/qiyomiddinjumabekov1@gmail.com
 
 ### Get History By date
 GET localhost:8080/email/by-date?date=2026-05-18
+
+### Get History By Pagination
+GET localhost:8080/email/pagination?page=1&size=2
