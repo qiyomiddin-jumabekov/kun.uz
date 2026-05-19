@@ -2,10 +2,12 @@ package dasturlash.uz.service;
 
 import dasturlash.uz.dto.verification.ConfirmDto;
 import dasturlash.uz.dto.verification.EmailVerifyDto;
+import dasturlash.uz.entity.EmailHistory;
 import dasturlash.uz.entity.EmailVerification;
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.enums.Status;
 import dasturlash.uz.enums.Visible;
+import dasturlash.uz.repository.EmailRepository;
 import dasturlash.uz.repository.EmailVerificationRepository;
 import dasturlash.uz.repository.ProfileRepository;
 import jakarta.mail.MessagingException;
@@ -25,6 +27,8 @@ public class EmailVerificationService {
     private EmailVerificationRepository emailVerificationRepository;
     @Autowired
     private JavaMailSender mailSender;
+    @Autowired
+    private EmailRepository emailRepository;
 
     public boolean sendCode(String toEmail, String code) {
         try {
@@ -68,6 +72,13 @@ public class EmailVerificationService {
             email.setCreatedTime(LocalDateTime.now());
             email.setExpiredTime(LocalDateTime.now().plusMinutes(2));
             emailVerificationRepository.save(email);
+
+            // For Email History
+            EmailHistory history = new EmailHistory();
+            history.setMessage("Code : " + code);
+            history.setCreatedDate(LocalDateTime.now());
+            history.setEmail(emailVerifyDto.email());
+            emailRepository.save(history);
             return true;
         }
         return false;

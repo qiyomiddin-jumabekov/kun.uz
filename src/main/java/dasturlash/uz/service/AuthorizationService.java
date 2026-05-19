@@ -59,6 +59,9 @@ public class AuthorizationService {
         if (!bCryptPasswordEncoder.matches(request.password(), profile.getPassword())) {
             throw new IllegalArgumentException("Username or  password not found");
         }
+        if (profile.getStatus() == Status.NOT_ACTIVE) {
+            throw new IllegalArgumentException("User is not active! Please confirm your email!");
+        }
 
 
         return new ResponseDtoForLogin(
