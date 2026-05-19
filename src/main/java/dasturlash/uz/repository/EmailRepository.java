@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface EmailRepository extends JpaRepository<EmailHistory, Integer> {
@@ -16,4 +17,13 @@ public interface EmailRepository extends JpaRepository<EmailHistory, Integer> {
             " from EmailHistory e " +
             " where e.email= :email")
     List<EmailHistoryDto> findAllByEmail(@Param("email") String email);
+
+
+    @Query("select new" +
+            " dasturlash.uz.dto.email.EmailHistoryDto(e.email,e.message,e.createdDate)" +
+            " from EmailHistory e" +
+            " where e.createdDate between :start and :end ")
+    List<EmailHistoryDto> findAllByCreatedDateBetween(LocalDateTime start, LocalDateTime end);
+
 }
+
