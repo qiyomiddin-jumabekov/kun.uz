@@ -7,5 +7,6 @@ public record RequestDtoForProfile(
         @NotBlank(message = "Surname is required") String surname,
         @NotBlank(message = "Email is required") String email,
         @NotBlank(message = "Username is required") String username,
+        @NotBlank(message = "Phone number is required") String phoneNumber,
         @NotBlank(message = "Password is required") String password) {
 }

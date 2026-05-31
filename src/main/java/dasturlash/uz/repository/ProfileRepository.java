@@ -1,6 +1,7 @@
 package dasturlash.uz.repository;
 
 import dasturlash.uz.entity.Profile;
+import dasturlash.uz.enums.Visible;
 import dasturlash.uz.projections.profile.ProfileShortInfo;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.domain.Page;

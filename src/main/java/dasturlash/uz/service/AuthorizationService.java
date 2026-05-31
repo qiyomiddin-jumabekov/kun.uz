@@ -22,6 +22,9 @@ public class AuthorizationService {
     @Autowired
     private EmailVerificationService emailService;
 
+    @Autowired
+    private SmsService smsService;
+
 
     public String registerUser(RequestDtoForProfile request) {
         if (profileRepository.existsByUsername(request.username())) {
@@ -40,11 +43,14 @@ public class AuthorizationService {
         profile.setVisible(Visible.INACTIVE);
         profile.setStatus(Status.NOT_ACTIVE);
         profileRepository.save(profile);
-        boolean b = emailService.emailVerifyMethod(
-                request.email(),
-                request.username());
-        if (!b) {
-            throw new IllegalArgumentException("Email verification failed");
+
+//        boolean emailSend = emailService.emailVerifyMethod(
+//                request.email(),
+//                request.username());
+
+        boolean smsSend = smsService.sendSms(request.phoneNumber());
+        if (!smsSend) {
+            throw new IllegalArgumentException("Verification failed");
         }
         return "User registered successfully! Verification code is send";
     }

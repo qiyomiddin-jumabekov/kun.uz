@@ -1,8 +1,8 @@
 ### Get Profile By Id
-GET localhost:8080/profile/by-id/1
+GET localhost:8085/profile/by-id/1
 
 ### Update profile
-PUT localhost:8080/profile?id=1
+PUT localhost:8085/profile?id=1
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### Update Profile By Details
-PUT localhost:8080/profile/update-detail/1
+PUT localhost:8085/profile/update-detail/1
 Content-Type: application/json
 
 {
@@ -21,13 +21,13 @@ Content-Type: application/json
 }
 
 ### Get all profiles by Pagination
-GET localhost:8080/profile/list?page=1&size=8
+GET localhost:8085/profile/list?page=1&size=8
 
 ### Delete Profile By Id
-DELETE localhost:8080/profile?id=1
+DELETE localhost:8085/profile?id=1
 
 ### Update Password
-PUT localhost:8080/profile/password/6
+PUT localhost:8085/profile/password/6
 Content-Type: application/json
 
 {
@@ -36,4 +36,4 @@ Content-Type: application/json
 }
 
 ### Get profiles by filter
-GET localhost:8080/profile/filter?page=1&size=3&query=Islom
+GET localhost:8085/profile/filter?page=1&size=3&query=Islom

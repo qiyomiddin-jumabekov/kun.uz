@@ -1,32 +1,42 @@
 ### Registration
-POST localhost:8080/auth/register
+POST localhost:8085/auth/register
 Content-Type: application/json
 
 {
-  "surname": "Azizov",
-  "name": "Aziz",
-  "password": "0000",
-  "username": "Znjnx",
-  "email": "qiyomiddinjumabekov1@gmail.com"
+  "surname": "Jumabekov",
+  "name": "Zayniddin",
+  "password": "Zayniddin2013",
+  "username": "bjbjb",
+  "email": "bhbh@gmail.com",
+  "phoneNumber": "+998507889670"
 }
 
 ### Confirm Profile
-POST localhost:8080/auth/confirm
+POST localhost:8085/auth/confirm
 Content-Type: application/json
 
 {
   "email": "qiyomiddinjumabekov1@gmail.com",
-  "code": "58887"
+  "code": "48601"
 }
 
 ### Resent Code
-POST localhost:8080/auth/resent/qiyomiddinjumabekov1@gmail.com
+POST localhost:8085/auth/resent/qiyomiddinjumabekov1@gmail.com
 
 ### Login Profile
-POST localhost:8080/auth/login
+POST localhost:8085/auth/login
 Content-Type: application/json
 
 {
   "username": "Znjnx",
   "password": "0000"
+}
+
+### Eskiz
+POST localhost:8081/auth/client-login
+Content-Type: application/json
+
+{
+  "login": "Eskiz",
+  "password": "Eskizov"
 }

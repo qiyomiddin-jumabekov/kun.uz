@@ -3,7 +3,6 @@ package dasturlash.uz.repository;
 import dasturlash.uz.entity.Category;
 import dasturlash.uz.enums.Visible;
 import dasturlash.uz.projections.category.ProjectionCategoryLang;
-import dasturlash.uz.projections.region.ProjectionRegionLang;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

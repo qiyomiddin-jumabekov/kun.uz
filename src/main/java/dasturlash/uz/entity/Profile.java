@@ -24,6 +24,8 @@ public class Profile {
     private String username;
     @Column
     private String password;
+    @Column
+    private String phone;
     @Column(unique = true)
     private String email;
     @Column

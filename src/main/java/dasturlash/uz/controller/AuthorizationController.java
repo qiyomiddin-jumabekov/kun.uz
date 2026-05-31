@@ -19,7 +19,6 @@ public class AuthorizationController {
     @Autowired
     private EmailVerificationService emailVerificationService;
 
-
     public AuthorizationController(AuthorizationService authorizationService) {
         this.authorizationService = authorizationService;
     }
@@ -43,4 +42,6 @@ public class AuthorizationController {
     public ResponseEntity<String> resentUser(@PathVariable String email) {
         return ResponseEntity.ok(emailVerificationService.resentCode(email));
     }
+
+
 }
