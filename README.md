@@ -1,14 +1,14 @@
 # Kun.uz — Backend Clone
 
-Kun.uz xabar portali backend qismi (o'quv loyihasi).
+Backend clone of Kun.uz news portal (educational project).
 
-## Funksionallar
-- Foydalanuvchi ro'yxatdan o'tish va login
-- Maqolalar CRUD
-- SMS tasdiqlash tizimi
+## Features
+- User registration and login
+- Articles CRUD
+- SMS verification system
 - Spring Security
 
-## Texnologiyalar
+## Technologies
 - Java 17
 - Spring Boot
 - Spring Security
@@ -16,7 +16,7 @@ Kun.uz xabar portali backend qismi (o'quv loyihasi).
 - REST API
 - Maven
 
-## Ishga tushirish
-1. Reponi clone qiling
-2. application.properties da DB sozlang
-3. `mvn spring-boot:run`
+## Getting Started
+1. Clone the repository
+2. Configure DB in application.properties
+3. Run `mvn spring-boot:run`
