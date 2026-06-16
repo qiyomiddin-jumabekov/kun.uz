@@ -34,29 +34,36 @@ public class SmsService {
 
     public boolean sendSms(String phoneNumber) {
         String code = String.format("%06d", new Random().nextInt(999999));
-        Integer clientId = getClientId();
-        RequestDtoForSms dto = new RequestDtoForSms();
-        dto.setClientId(clientId);
-        dto.setMessage(code);
-        dto.setPhoneNumber(phoneNumber);
+
         try {
-            ResponseEntity<String> booleanResponseEntity = restTemplate.postForEntity(provUrl + "/send", dto, String.class);
-            System.out.println("URL response : " + booleanResponseEntity.getBody());
+            Integer clientId = getClientId(); // ← try ichiga ko'chiring
+
+            RequestDtoForSms dto = new RequestDtoForSms();
+            dto.setClientId(clientId);
+            dto.setMessage(code);
+            dto.setPhoneNumber(phoneNumber);
+
+            ResponseEntity<String> response = restTemplate.postForEntity(
+                    provUrl + "/send", dto, String.class
+            );
+            System.out.println("URL response : " + response.getBody());
+
             Sms sms = new Sms();
             sms.setPhone(phoneNumber);
             sms.setMessage(code);
             sms.setSmsProviderId(clientId);
             smsRepository.save(sms);
             return true;
+
         } catch (RuntimeException e) {
-            System.out.println("Sms provider ulanishda Xatolik: " + e.getMessage());
-            throw new RuntimeException("Sms provider ulanishda Xatolik");
+            System.out.println("Xatolik: " + e.getMessage());
+            throw new RuntimeException("Sms provider ulanishda Xatolik: " + e.getMessage());
         }
     }
 
     public Integer getClientId() {
         RequestForGetClientId dto = new RequestForGetClientId(clientLogin, clientPassword);
-        ResponseEntity<Integer> response = restTemplate.postForEntity(authUrl + "/client-login", dto, Integer.class);
+        ResponseEntity<Integer> response = restTemplate.postForEntity(authUrl + "/get-id", dto, Integer.class);
         return response.getBody();
     }
 }

@@ -1,14 +1,15 @@
 package dasturlash.uz.repository;
 
 import dasturlash.uz.entity.Profile;
-import dasturlash.uz.enums.Visible;
+import dasturlash.uz.enums.ProfileRoles;
 import dasturlash.uz.projections.profile.ProfileShortInfo;
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import java.util.Optional;
 
 public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 
@@ -35,10 +36,11 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
     public Page<ProfileShortInfo> getProfilesByFilter(Pageable page, @Param("query") String query);
 
 
-    public Profile findByUsername(String username);
+    public Optional<Profile> findByUsername(String username);
 
     public boolean existsByEmail(String email);
 
     public Profile findByEmail(String email);
 
+    ProfileRoles getProfileRoleById(Integer id);
 }

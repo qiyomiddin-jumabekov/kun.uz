@@ -56,23 +56,8 @@ public class AuthorizationService {
     }
 
     public ResponseDtoForLogin userLogin(RequestForLogin request) {
-        Profile profile = profileRepository.findByUsername(request.username());
-        if (profile == null) {
-            throw new IllegalArgumentException("Username or password not found");
-        }
-        if (!bCryptPasswordEncoder.matches(request.password(), profile.getPassword())) {
-            throw new IllegalArgumentException("Username or  password not found");
-        }
-        if (profile.getStatus() == Status.NOT_ACTIVE) {
-            throw new IllegalArgumentException("User is not active! Please confirm your email!");
-        }
-
-
-        return new ResponseDtoForLogin(
-                profile.getName(),
-                profile.getSurname(),
-                profile.getUsername(),
-                profile.getPhotoId()
-        );
+        Profile profile = profileRepository.findByUsername(request.username())
+                .orElseThrow(() -> new IllegalArgumentException("profile not found"));
+        throw new IllegalArgumentException("Username or password not found");
     }
 }
