@@ -1,10 +1,10 @@
 ### Create Attach
-POST http://localhost:8080/attach
+POST http://localhost:8081/attach/upload
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
 Content-Disposition: form-data; name="file"; filename="mazgi_rasm.jpeg"
 Content-Type: application/octet-stream
 
-< /Users/qiyomiddinjumabekov/Downloads/mazgi_rasm.jpeg
+< /Users/qiyomiddinjumabekov/Downloads/mazgi_rasm.jpg
 --WebAppBoundary--

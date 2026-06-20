@@ -17,12 +17,13 @@ public class Attach {
 
     @Column(name = "original_name")
     private String originalName;
-
+    @Column(name = "file_path")
     private String path;
-
+    @Column(name = "file_size")
     private Long size;
-
+    @Column(name = "file_extension")
     private String extension;
+    @Column(name = "created_date")
     @CreationTimestamp
     private LocalDateTime creationDate;
 }

@@ -35,7 +35,8 @@ public class SpringConfig {
             "/auth/resent/*",
             "/auth/login/*",
             "/auth/client-login",
-            "/sms/send"
+            "/sms/send",
+            "/attach/upload"
     };
 
     @Bean
