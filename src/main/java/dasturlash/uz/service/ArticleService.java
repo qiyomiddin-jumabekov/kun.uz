@@ -92,4 +92,12 @@ public class ArticleService {
 
         return toDto(article);
     }
+
+    public String deleteArticleById(String id) {
+        int result = articleRepository.deleteArticle(id, Visible.INACTIVE);
+        if (result < 0) {
+            throw new IllegalArgumentException("Article Not Found");
+        }
+        return "Article Deleted Successfully";
+    }
 }
