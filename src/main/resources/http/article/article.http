@@ -6,9 +6,32 @@ Content-Type: application/json
 {
   "title": "WWWW",
   "content": "Article",
-  "categoryIds":[1],
+  "categoryIds": [
+    1
+  ],
   "description": "DDDD",
   "imageId": 1,
   "regionId": 1,
-  "sectionIds": [1]
+  "sectionIds": [
+    1
+  ]
+}
+
+### Update Article
+PUT localhost:8081/article/update/9fb4ae59-4d0b-49ec-befb-fd37c7c2e55a
+Authorization: Basic UVFROjAwMDA=
+Content-Type: application/json
+
+{
+  "title": "IIII",
+  "content": "EEEE",
+  "categoryIds": [
+    1
+  ],
+  "description": "DDXXXDD",
+  "imageId": 1,
+  "regionId": 1,
+  "sectionIds": [
+    1
+  ]
 }

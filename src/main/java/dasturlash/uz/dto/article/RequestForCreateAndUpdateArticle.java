@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class RequestForCreateArticle {
+public class RequestForCreateAndUpdateArticle {
     @NotBlank(message = "Article title is not empty")
     private String title;
     @NotBlank(message = "Article description is not empty")

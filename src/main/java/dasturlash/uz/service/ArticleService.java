@@ -1,6 +1,6 @@
 package dasturlash.uz.service;
 
-import dasturlash.uz.dto.article.RequestForCreateArticle;
+import dasturlash.uz.dto.article.RequestForCreateAndUpdateArticle;
 import dasturlash.uz.dto.article.ResponseDtoForArticle;
 import dasturlash.uz.entity.Article;
 import dasturlash.uz.enums.ArticleStatus;
@@ -22,7 +22,7 @@ public class ArticleService {
     @Autowired
     private ArticleSectionService articleSectionService;
 
-    public ResponseDtoForArticle createArticle(@Valid RequestForCreateArticle request) {
+    public ResponseDtoForArticle createArticle(@Valid RequestForCreateAndUpdateArticle request) {
         // get moderator id with ContextHolder
         Integer moderatorId = SecurityUtil.getCurrentUserId();
 
@@ -63,5 +63,33 @@ public class ArticleService {
         dto.setCreatedAt(article.getCreatedAt());
         dto.setArticleId(article.getId());
         return dto;
+    }
+
+    public ResponseDtoForArticle updateArticle(String articleId, RequestForCreateAndUpdateArticle request) {
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new IllegalArgumentException("Article Not Found"));
+
+        Integer moderatorId = SecurityUtil.getCurrentUserId();
+
+        article.setContent(request.getContent());
+        article.setTitle(request.getTitle());
+        article.setDescription(request.getDescription());
+        article.setImageId(request.getImageId());
+        article.setRegionId(request.getRegionId());
+        article.setModeratorId(moderatorId);
+        article.setReadTime(3.5);
+        article.setSharedCount(0);
+        article.setViewCount(0);
+        article.setStatus(ArticleStatus.NOT_PUBLISHED);
+        article.setVisible(Visible.INACTIVE);
+        articleRepository.save(article);
+
+        // Update Article-Category
+        articleCategoryService.updateArticleCategory(article.getId(), request.getCategoryIds());
+
+        // Update Article-Section
+        articleSectionService.updateArticleSection(article.getId(), request.getSectionIds());
+
+        return toDto(article);
     }
 }
