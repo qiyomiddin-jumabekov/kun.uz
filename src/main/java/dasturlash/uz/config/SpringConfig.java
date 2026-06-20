@@ -3,88 +3,88 @@ package dasturlash.uz.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.List;
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
 public class SpringConfig {
 
     @Autowired
-    private CustomUserDetailsService customUserDetailsService;
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
-    private JwtAuthenticationFilter jwtTokenFilter;
-
-    public static final String[] AUTH_WHITELIST = {
-            "/auth/register",
-            "/auth/confirm",
-            "/auth/resent/*",
-            "/auth/login/*",
-            "/auth/client-login",
-            "/sms/send",
-            "/attach/upload"
-    };
+    private UserDetailsService userDetailsService;
 
     @Bean
-    public AuthenticationProvider authenticationProvider() {
-        // authentication - Foydalanuvchining identifikatsiya qilish.
-        // Ya'ni berilgan login va parolli user bor yoki yo'qligini aniqlash.
-//        String password = UUID.randomUUID().toString();
-//        System.out.println("User Password Mazgi: " + password);
-//
-//        UserDetails user = User.builder()
-//                .username("men")
-//                .password("{noop}" + password)
+    public AuthenticationProvider authenticationProvider(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        // Authentication - Foydalanuvchini identifikatsiya qiladi
+        // Yani berilgan parol va username orqali shu user bor yoki yo'qligini tekshiradi
+//        String password = "12345";
+//        System.out.println("Using generated password mazgi : " + password);
+
+//        UserDetails user = User
+//                .builder()
+//                .username("mazgibek")
+//                .password("{bcrypt}$2a$10$yAVXiIysoaTouPvJaEOZO.v1kziGTWY4J/gILHVuNWXh2yYdNIWIa")
 //                .roles("USER")
 //                .build();
-
-        final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(customUserDetailsService);
+        final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(userDetailsService);
         authenticationProvider.setPasswordEncoder(bCryptPasswordEncoder);
+        System.out.println("BCryptPasswordEncoder: ");
         return authenticationProvider;
+
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // authorization - Foydalanuvchining tizimdagi huquqlarini tekshirish.
-        // Ya'ni foydalanuvchi murojat qilayotgan API-larni ishlatishga ruxsati bor yoki yo'qligini tekshirishdir.
-        http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
-            authorizationManagerRequestMatcherRegistry
-                    .requestMatchers(AUTH_WHITELIST).permitAll()
-                    .anyRequest().authenticated();
-        }).addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        // Authorization - Foydalanuvchining tizimdagi bor huquqlarini tekshiradi
+        // Yani foydalanuvchi murojaat qilayotgan Api ga ruxasti bor yoki yo'qligini tekshiradi
+        http.authorizeHttpRequests(authorizeRequests ->
+                authorizeRequests
+                        .requestMatchers("/auth/register").permitAll()
+                        .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/auth/confirm").permitAll()
+                        .requestMatchers("/auth/resent/*").permitAll()
+                        .anyRequest()
+                        .authenticated());
 
-//        http.httpBasic(Customizer.withDefaults()); // httpBasic-dan foydanalish uchun u enable qilindi (ishlatmoqchi ekanligimiz yozildi) (yoqib qo'yild).
 
-
+        http.httpBasic(Customizer.withDefaults());
         http.csrf(AbstractHttpConfigurer::disable);
+        System.out.println("Security Filter Chain");
 
-        // CORS sozlamalari (Frontend ulanishi uchun hamma narsaga ruxsat berilgan)
-        http.cors(cors -> {
+        http.cors(corsConfiguration -> {
             CorsConfiguration configuration = new CorsConfiguration();
-            configuration.setAllowedOriginPatterns(List.of("*"));
-            configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-            configuration.setAllowedHeaders(List.of("*"));
-            configuration.setAllowCredentials(true);
+            configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+            configuration.setAllowedMethods(Arrays.asList("*"));
+            configuration.setAllowedHeaders(Arrays.asList("*"));
 
             UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
             source.registerCorsConfiguration("/**", configuration);
-            cors.configurationSource(source);
+            corsConfiguration.configurationSource(source);
         });
-
+        System.out.println("Security Filter Chain");
         return http.build();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }

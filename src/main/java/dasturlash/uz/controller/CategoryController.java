@@ -2,12 +2,8 @@ package dasturlash.uz.controller;
 
 import dasturlash.uz.dto.category.RequestForCategory;
 import dasturlash.uz.dto.category.ResponseDtoForCategoryLang;
-import dasturlash.uz.dto.region.RequestForRegion;
-import dasturlash.uz.dto.region.ResponseDtoForRegionLang;
 import dasturlash.uz.entity.Category;
-import dasturlash.uz.entity.Region;
 import dasturlash.uz.service.CategoryService;
-import dasturlash.uz.service.RegionService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;

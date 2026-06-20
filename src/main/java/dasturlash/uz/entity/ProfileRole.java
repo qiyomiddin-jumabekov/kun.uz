@@ -12,8 +12,10 @@ public class ProfileRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "profile_id")
+    private Integer profileId;
     @ManyToOne
-    @JoinColumn(name = "profile_id")
+    @JoinColumn(name = "profile_id", insertable = false, updatable = false)
     private Profile profile;
     @Column
     @Enumerated(EnumType.STRING)

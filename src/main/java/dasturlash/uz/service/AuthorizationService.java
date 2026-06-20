@@ -4,9 +4,11 @@ import dasturlash.uz.dto.auth.RequestForLogin;
 import dasturlash.uz.dto.auth.ResponseDtoForLogin;
 import dasturlash.uz.dto.profile.RequestDtoForProfile;
 import dasturlash.uz.entity.Profile;
+import dasturlash.uz.enums.ProfileRoles;
 import dasturlash.uz.enums.Status;
 import dasturlash.uz.enums.Visible;
 import dasturlash.uz.repository.ProfileRepository;
+import dasturlash.uz.repository.ProfileRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,9 @@ public class AuthorizationService {
     @Autowired
     private SmsService smsService;
 
+    @Autowired
+    private ProfileRoleService profileRoleService;
+
 
     public String registerUser(RequestDtoForProfile request) {
         if (profileRepository.existsByUsername(request.username())) {
@@ -42,16 +47,21 @@ public class AuthorizationService {
         profile.setEmail(request.email());
         profile.setVisible(Visible.INACTIVE);
         profile.setStatus(Status.NOT_ACTIVE);
+        profile.setPhone(request.phoneNumber());
         profileRepository.save(profile);
+
+        // Create Profile Role
+        profileRoleService.createProfileRole(profile.getId(), ProfileRoles.ADMIN);
+
 
 //        boolean emailSend = emailService.emailVerifyMethod(
 //                request.email(),
 //                request.username());
 
-        boolean smsSend = smsService.sendSms(request.phoneNumber());
-        if (!smsSend) {
-            throw new IllegalArgumentException("Verification failed");
-        }
+//        boolean smsSend = smsService.sendSms(request.phoneNumber());
+//        if (!smsSend) {
+//            throw new IllegalArgumentException("Verification failed");
+//        }
         return "User registered successfully! Verification code is send";
     }
 

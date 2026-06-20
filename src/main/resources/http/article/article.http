@@ -1,0 +1,14 @@
+### Create Article
+POST localhost:8081/article/create
+Authorization: Basic UVFROjAwMDA=
+Content-Type: application/json
+
+{
+  "title": "WWWW",
+  "content": "Article",
+  "categoryIds":[1],
+  "description": "DDDD",
+  "imageId": 1,
+  "regionId": 1,
+  "sectionIds": [1]
+}

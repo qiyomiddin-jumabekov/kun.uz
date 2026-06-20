@@ -36,7 +36,10 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
     public Page<ProfileShortInfo> getProfilesByFilter(Pageable page, @Param("query") String query);
 
 
-    public Optional<Profile> findByUsername(String username);
+
+    @Query("select p from Profile p " +
+            " where p.username = :username")
+    public Optional<Profile> findByUsername(@Param("username") String username);
 
     public boolean existsByEmail(String email);
 
