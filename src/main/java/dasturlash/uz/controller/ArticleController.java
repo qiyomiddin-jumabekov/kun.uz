@@ -1,5 +1,6 @@
 package dasturlash.uz.controller;
 
+import dasturlash.uz.dto.article.RequestChangeStatusArticle;
 import dasturlash.uz.dto.article.RequestForCreateAndUpdateArticle;
 import dasturlash.uz.service.ArticleService;
 import jakarta.validation.Valid;
@@ -29,5 +30,10 @@ public class ArticleController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteArticle(@PathVariable String id) {
         return ResponseEntity.ok(articleService.deleteArticleById(id));
+    }
+
+    @PutMapping("/change-status")
+    public ResponseEntity<?> changeArticleStatus(@RequestBody @Valid RequestChangeStatusArticle request) {
+        return ResponseEntity.ok(articleService.changeArticleStatus(request));
     }
 }

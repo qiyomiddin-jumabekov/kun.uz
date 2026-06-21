@@ -1,5 +1,6 @@
 package dasturlash.uz.service;
 
+import dasturlash.uz.dto.article.RequestChangeStatusArticle;
 import dasturlash.uz.dto.article.RequestForCreateAndUpdateArticle;
 import dasturlash.uz.dto.article.ResponseDtoForArticle;
 import dasturlash.uz.entity.Article;
@@ -99,5 +100,13 @@ public class ArticleService {
             throw new IllegalArgumentException("Article Not Found");
         }
         return "Article Deleted Successfully";
+    }
+
+    public String changeArticleStatus(RequestChangeStatusArticle request) {
+        int result = articleRepository.changeArticleStatusById(request.articleId(), request.status());
+        if (result < 0) {
+            throw new IllegalArgumentException("Article Not Found");
+        }
+        return "Article Status Changed Successfully";
     }
 }

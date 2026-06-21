@@ -3,7 +3,6 @@ package dasturlash.uz.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -41,7 +40,6 @@ public class SpringConfig {
 //                .build();
         final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(userDetailsService);
         authenticationProvider.setPasswordEncoder(bCryptPasswordEncoder);
-        System.out.println("BCryptPasswordEncoder: ");
         return authenticationProvider;
 
     }
@@ -62,7 +60,6 @@ public class SpringConfig {
 
         http.httpBasic(Customizer.withDefaults());
         http.csrf(AbstractHttpConfigurer::disable);
-        System.out.println("Security Filter Chain");
 
         http.cors(corsConfiguration -> {
             CorsConfiguration configuration = new CorsConfiguration();
@@ -74,7 +71,6 @@ public class SpringConfig {
             source.registerCorsConfiguration("/**", configuration);
             corsConfiguration.configurationSource(source);
         });
-        System.out.println("Security Filter Chain");
         return http.build();
     }
 
