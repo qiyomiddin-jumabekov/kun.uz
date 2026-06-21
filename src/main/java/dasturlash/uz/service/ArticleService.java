@@ -1,16 +1,21 @@
 package dasturlash.uz.service;
 
-import dasturlash.uz.dto.article.RequestChangeStatusArticle;
-import dasturlash.uz.dto.article.RequestForCreateAndUpdateArticle;
-import dasturlash.uz.dto.article.ResponseDtoForArticle;
+import dasturlash.uz.dto.article.*;
 import dasturlash.uz.entity.Article;
 import dasturlash.uz.enums.ArticleStatus;
 import dasturlash.uz.enums.Visible;
+import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
 import dasturlash.uz.repository.ArticleRepository;
 import dasturlash.uz.util.SecurityUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Limit;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ArticleService {
@@ -108,5 +113,16 @@ public class ArticleService {
             throw new IllegalArgumentException("Article Not Found");
         }
         return "Article Status Changed Successfully";
+    }
+
+    public Page<ArticleShortInfoForArticleSection> getArticlesBySectionId(int page, int size, RequestGetNArticlesBySectionId request) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        return articleRepository.getArticlesBySectionId(request.sectionId(), pageable);
+    }
+
+    public Page<ResponseDtoForArticle> getLast12ArticlesExceptIds(int page, int size, RequestLast12Except request) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Article> list = articleRepository.getLast12ArticlesExceptIds(request.idList(), pageable);
+        return list.map(this::toDto);
     }
 }

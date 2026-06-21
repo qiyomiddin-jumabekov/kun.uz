@@ -3,11 +3,16 @@ package dasturlash.uz.repository;
 import dasturlash.uz.entity.Article;
 import dasturlash.uz.enums.ArticleStatus;
 import dasturlash.uz.enums.Visible;
+import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface ArticleRepository extends JpaRepository<Article, String> {
 
@@ -22,4 +27,24 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
     @Query("update Article a  set a.status = :status" +
             " where a.id = :articleId")
     int changeArticleStatusById(@Param("articleId") String id, @Param("status") ArticleStatus status);
+
+
+    @Query("select a.id as articleId, a.title as title, a.content as content," +
+            " a.createdAt as createdAt, asec.sectionId as sectionId" +
+            " from Article a" +
+            " inner join ArticleSection as asec on asec.articleId = a.id" +
+            " where asec.sectionId = :sectionId" +
+            " and a.status = dasturlash.uz.enums.ArticleStatus.PUBLISHED" +
+            " order by a.createdAt desc ")
+    Page<ArticleShortInfoForArticleSection> getArticlesBySectionId(@Param("sectionId") Integer integer, Pageable pageable);
+
+
+    @Query("select a from Article a " +
+            " where a.status = dasturlash.uz.enums.ArticleStatus.PUBLISHED" +
+            " and a.id not in :idList" +
+            " order by a.createdAt desc")
+    Page<Article> getLast12ArticlesExceptIds(
+            @Param("idList") List<String> idList,
+            Pageable pageable
+    );
 }

@@ -1,10 +1,11 @@
 package dasturlash.uz.controller;
 
-import dasturlash.uz.dto.article.RequestChangeStatusArticle;
-import dasturlash.uz.dto.article.RequestForCreateAndUpdateArticle;
+import dasturlash.uz.dto.article.*;
+import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
 import dasturlash.uz.service.ArticleService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +36,21 @@ public class ArticleController {
     @PutMapping("/change-status")
     public ResponseEntity<?> changeArticleStatus(@RequestBody @Valid RequestChangeStatusArticle request) {
         return ResponseEntity.ok(articleService.changeArticleStatus(request));
+    }
+
+    @GetMapping("/get-by/sectionId")
+    public ResponseEntity<Page<ArticleShortInfoForArticleSection>> getArticlesBySectionId(
+            @RequestBody @Valid RequestGetNArticlesBySectionId request,
+            @RequestParam(value = "size", defaultValue = "1") int size,
+            @RequestParam(value = "page", defaultValue = "5") int page) {
+        return ResponseEntity.ok(articleService.getArticlesBySectionId(page, size, request));
+    }
+
+    @PostMapping("/last12-except")
+    public ResponseEntity<?> last12ArticlesExceptIds(
+            @RequestBody @Valid RequestLast12Except request,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "5") int size) {
+        return ResponseEntity.ok(articleService.getLast12ArticlesExceptIds(page, size, request));
     }
 }
