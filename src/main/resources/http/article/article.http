@@ -93,4 +93,11 @@ Content-Type: application/json
 GET localhost:8081/article/get-by-id/9fb4ae59-4d0b-49ec-befb-fd37c7c2e55a
 Authorization: Basic UVFROjAwMDA=
 
+### Get Articles By Tag Name
+POST localhost:8081/article/get-by/tag-name
+Authorization: Basic UVFROjAwMDA=
+Content-Type: application/json
 
+{
+  "name": "TAG"
+}

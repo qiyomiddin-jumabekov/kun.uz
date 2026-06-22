@@ -2,9 +2,9 @@ package dasturlash.uz.config;
 
 import dasturlash.uz.entity.Profile;
 import dasturlash.uz.enums.ProfileRoles;
+import dasturlash.uz.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
-import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,12 +21,14 @@ public class CustomUserDetails implements UserDetails {
     private String password;
     private Integer id;
     private List<ProfileRoles> role;
+    private Status status;
 
     public CustomUserDetails(Profile profile, List<ProfileRoles> role) {
         this.id = profile.getId();
         this.password = profile.getPassword();
         this.username = profile.getUsername();
         this.role = role;
+        this.status = profile.getStatus();
     }
 
     @Override
@@ -39,14 +41,13 @@ public class CustomUserDetails implements UserDetails {
     }
 
     @Override
-    public @Nullable String getPassword() {
-        return password;
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
     }
 
-
     @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    public boolean isAccountNonLocked() {
+        return status == Status.ACTIVE;
     }
 
     @Override
@@ -56,7 +57,6 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return UserDetails.super.isEnabled();
     }
-
 }

@@ -23,6 +23,10 @@ public class TagService {
         if (!exist) {
             throw new IllegalArgumentException("Article not found");
         }
+        boolean found = tagRepository.existsByNameAndArticleId(request.name(), request.articleId());
+        if (found) {
+            throw new IllegalArgumentException("Tag name already exists");
+        }
         Tag tag = new Tag();
         tag.setArticleId(request.articleId());
         tag.setName(request.name());

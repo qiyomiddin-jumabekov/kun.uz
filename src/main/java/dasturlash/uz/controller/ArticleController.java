@@ -3,6 +3,7 @@ package dasturlash.uz.controller;
 import dasturlash.uz.dto.article.*;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleCategory;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
+import dasturlash.uz.projections.article.ArticleShortInfoForArticleTag;
 import dasturlash.uz.service.ArticleService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,5 +76,13 @@ public class ArticleController {
     public ResponseEntity<ResponseDtoForArticle> getArticleById(
             @PathVariable String id) {
         return ResponseEntity.ok(articleService.getArticleById(id));
+    }
+
+    @PostMapping("/get-by/tag-name")
+    public ResponseEntity<Page<ArticleShortInfoForArticleTag>> getArticleByTagName(
+            @RequestBody @Valid RequestGetArticlesByTagName request,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "5") int size) {
+        return ResponseEntity.ok(articleService.getArticlesByTagName(page, size, request));
     }
 }

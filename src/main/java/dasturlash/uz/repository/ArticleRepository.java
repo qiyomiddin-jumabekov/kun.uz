@@ -5,7 +5,9 @@ import dasturlash.uz.enums.ArticleStatus;
 import dasturlash.uz.enums.Visible;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleCategory;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
+import dasturlash.uz.projections.article.ArticleShortInfoForArticleTag;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -59,4 +61,11 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
     Page<ArticleShortInfoForArticleCategory> getArticlesByCategoryId(@Param("categoryId") Integer integer, Pageable pageable);
 
     Page<Article> getArticlesByRegionId(Integer integer, Pageable pageable);
+
+
+    @Query("select a.id as id,a.title as title,t.name as name  " +
+            " from Article a" +
+            " inner join Tag t on t.articleId = a.id" +
+            " where t.name = :tagName")
+    Page<ArticleShortInfoForArticleTag> getArticlesByTagName(@Param("tagName") String name, Pageable pageable);
 }

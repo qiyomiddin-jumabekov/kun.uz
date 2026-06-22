@@ -9,4 +9,6 @@ import java.util.List;
 public interface TagRepository extends CrudRepository<Tag, Integer> {
 
     List<ResponseDtoForTag> findAllBy();
+
+    boolean existsByNameAndArticleId( String name, String articleId);
 }

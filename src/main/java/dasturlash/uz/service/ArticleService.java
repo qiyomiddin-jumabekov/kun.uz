@@ -6,6 +6,7 @@ import dasturlash.uz.enums.ArticleStatus;
 import dasturlash.uz.enums.Visible;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleCategory;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
+import dasturlash.uz.projections.article.ArticleShortInfoForArticleTag;
 import dasturlash.uz.repository.ArticleRepository;
 import dasturlash.uz.util.SecurityUtil;
 import jakarta.validation.Valid;
@@ -142,5 +143,10 @@ public class ArticleService {
         Article article = articleRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Article Not Found"));
         return toDto(article);
+    }
+
+    public Page<ArticleShortInfoForArticleTag> getArticlesByTagName(int page, int size, RequestGetArticlesByTagName request) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        return articleRepository.getArticlesByTagName(request.name(), pageable);
     }
 }
