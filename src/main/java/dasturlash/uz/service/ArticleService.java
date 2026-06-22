@@ -4,6 +4,7 @@ import dasturlash.uz.dto.article.*;
 import dasturlash.uz.entity.Article;
 import dasturlash.uz.enums.ArticleStatus;
 import dasturlash.uz.enums.Visible;
+import dasturlash.uz.projections.article.ArticleShortInfo;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleCategory;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleTag;
@@ -15,6 +16,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ArticleService {
@@ -148,5 +151,10 @@ public class ArticleService {
     public Page<ArticleShortInfoForArticleTag> getArticlesByTagName(int page, int size, RequestGetArticlesByTagName request) {
         Pageable pageable = PageRequest.of(page - 1, size);
         return articleRepository.getArticlesByTagName(request.name(), pageable);
+    }
+
+    public List<ArticleShortInfo> getLast4ArticlesBySectionId(Integer sectionId, String articleId) {
+        Pageable pageable = PageRequest.of(0, 4);
+        return articleRepository.getLast4ArticlesBySectionId(sectionId,articleId,pageable);
     }
 }

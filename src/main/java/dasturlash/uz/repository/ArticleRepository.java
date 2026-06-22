@@ -1,8 +1,10 @@
 package dasturlash.uz.repository;
 
+import dasturlash.uz.dto.article.ResponseDtoForArticle;
 import dasturlash.uz.entity.Article;
 import dasturlash.uz.enums.ArticleStatus;
 import dasturlash.uz.enums.Visible;
+import dasturlash.uz.projections.article.ArticleShortInfo;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleCategory;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleTag;
@@ -68,4 +70,18 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
             " inner join Tag t on t.articleId = a.id" +
             " where t.name = :tagName")
     Page<ArticleShortInfoForArticleTag> getArticlesByTagName(@Param("tagName") String name, Pageable pageable);
+
+
+    @Query("select a.id as id,a.title as title," +
+            " a.content as content,a.createdAt as createdAt, a.visible as visible " +
+            " from Article a" +
+            " inner join ArticleSection asec on asec.articleId = a.id" +
+            " where asec.sectionId = :sectionId" +
+            " and a.id <> :articleId" +
+            " and a.status = dasturlash.uz.enums.ArticleStatus.PUBLISHED" +
+            " order by a.createdAt desc")
+    List<ArticleShortInfo> getLast4ArticlesBySectionId(
+            @Param("sectionId") Integer sectionId,
+            @Param("articleId") String articleId,
+            Pageable pageable);
 }

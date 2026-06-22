@@ -34,7 +34,6 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
         Profile profile = optional.get();
-        System.out.println("CustomUserDetailsService");
 
         List<ProfileRoles> roles = profileRoleRepository.getRolesByProfileId(profile.getId());
 

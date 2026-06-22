@@ -1,6 +1,7 @@
 package dasturlash.uz.controller;
 
 import dasturlash.uz.dto.article.*;
+import dasturlash.uz.projections.article.ArticleShortInfo;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleCategory;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleTag;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/article")
@@ -84,5 +87,12 @@ public class ArticleController {
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "size", defaultValue = "5") int size) {
         return ResponseEntity.ok(articleService.getArticlesByTagName(page, size, request));
+    }
+
+    @GetMapping("/last4-by-section/{sectionId}/{articleId}")
+    public ResponseEntity<List<ArticleShortInfo>> getLast4ArticlesBySectionId(
+            @PathVariable Integer sectionId,
+            @PathVariable String articleId) {
+        return ResponseEntity.ok(articleService.getLast4ArticlesBySectionId(sectionId, articleId));
     }
 }
