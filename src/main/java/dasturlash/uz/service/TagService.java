@@ -2,10 +2,13 @@ package dasturlash.uz.service;
 
 import dasturlash.uz.dto.tag.RequestForCreateTag;
 import dasturlash.uz.entity.Tag;
+import dasturlash.uz.projections.tag.ResponseDtoForTag;
 import dasturlash.uz.repository.ArticleRepository;
 import dasturlash.uz.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TagService {
@@ -25,5 +28,9 @@ public class TagService {
         tag.setName(request.name());
         tagRepository.save(tag);
         return "Tag successfully created";
+    }
+
+    public List<ResponseDtoForTag> getAllTags() {
+        return tagRepository.findAllBy();
     }
 }

@@ -7,3 +7,7 @@ Content-Type: application/json
   "articleId": "11ec45c6-2ba9-410c-87ad-c9fd14b0a774",
   "name": "TAG1"
 }
+
+### Get All Tags
+GET localhost:8081/tag/list
+Authorization: Basic UVFROjAwMDA=
