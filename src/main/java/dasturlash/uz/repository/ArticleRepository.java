@@ -3,6 +3,7 @@ package dasturlash.uz.repository;
 import dasturlash.uz.entity.Article;
 import dasturlash.uz.enums.ArticleStatus;
 import dasturlash.uz.enums.Visible;
+import dasturlash.uz.projections.article.ArticleShortInfoForArticleCategory;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -47,4 +48,13 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
             @Param("idList") List<String> idList,
             Pageable pageable
     );
+
+    @Query("select a.id as articleId, a.title as title, a.content as content," +
+            " a.createdAt as createdAt, acat.categoryId as categoryId" +
+            " from Article a" +
+            " inner join ArticleCategory as acat on acat.articleId = a.id" +
+            " where acat.categoryId = :categoryId" +
+            " and a.status = dasturlash.uz.enums.ArticleStatus.PUBLISHED" +
+            " order by a.createdAt desc ")
+    Page<ArticleShortInfoForArticleCategory> getArticlesByCategoryId(@Param("categoryId") Integer integer, Pageable pageable);
 }

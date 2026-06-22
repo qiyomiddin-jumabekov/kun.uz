@@ -1,6 +1,7 @@
 package dasturlash.uz.controller;
 
 import dasturlash.uz.dto.article.*;
+import dasturlash.uz.projections.article.ArticleShortInfoForArticleCategory;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
 import dasturlash.uz.service.ArticleService;
 import jakarta.validation.Valid;
@@ -52,5 +53,13 @@ public class ArticleController {
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "size", defaultValue = "5") int size) {
         return ResponseEntity.ok(articleService.getLast12ArticlesExceptIds(page, size, request));
+    }
+
+    @GetMapping("/get-by/category")
+    public ResponseEntity<Page<ArticleShortInfoForArticleCategory>> getArticlesByCategoryId(
+            @RequestBody @Valid RequestGetNArticlesByCategoryId request,
+            @RequestParam(value = "size", defaultValue = "1") int size,
+            @RequestParam(value = "page", defaultValue = "5") int page) {
+        return ResponseEntity.ok(articleService.getArticlesByCategoryId(page, size, request));
     }
 }

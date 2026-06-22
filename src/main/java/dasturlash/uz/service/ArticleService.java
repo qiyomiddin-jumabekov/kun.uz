@@ -4,6 +4,7 @@ import dasturlash.uz.dto.article.*;
 import dasturlash.uz.entity.Article;
 import dasturlash.uz.enums.ArticleStatus;
 import dasturlash.uz.enums.Visible;
+import dasturlash.uz.projections.article.ArticleShortInfoForArticleCategory;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
 import dasturlash.uz.repository.ArticleRepository;
 import dasturlash.uz.util.SecurityUtil;
@@ -124,5 +125,10 @@ public class ArticleService {
         Pageable pageable = PageRequest.of(page - 1, size);
         Page<Article> list = articleRepository.getLast12ArticlesExceptIds(request.idList(), pageable);
         return list.map(this::toDto);
+    }
+
+    public Page<ArticleShortInfoForArticleCategory> getArticlesByCategoryId(int page, int size, RequestGetNArticlesByCategoryId request) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        return articleRepository.getArticlesByCategoryId(request.categoryId(), pageable);
     }
 }

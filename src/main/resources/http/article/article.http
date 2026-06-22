@@ -70,3 +70,12 @@ Content-Type: application/json
     "11ec45c6-2ba9-410c-87ad-c9fd14b0a774"
   ]
 }
+
+### Get Articles By Category ID
+GET localhost:8081/article/get-by/category?page=1&size=1
+Authorization: Basic UVFROjAwMDA=
+Content-Type: application/json
+
+{
+  "categoryId": 1
+}
