@@ -10,13 +10,10 @@ import dasturlash.uz.repository.ArticleRepository;
 import dasturlash.uz.util.SecurityUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Limit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ArticleService {
@@ -130,5 +127,11 @@ public class ArticleService {
     public Page<ArticleShortInfoForArticleCategory> getArticlesByCategoryId(int page, int size, RequestGetNArticlesByCategoryId request) {
         Pageable pageable = PageRequest.of(page - 1, size);
         return articleRepository.getArticlesByCategoryId(request.categoryId(), pageable);
+    }
+
+    public Page<ResponseDtoForArticle> getArticlesByRegionId(int page, int size, RequestGetArticlesByRegionId request) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Article> list = articleRepository.getArticlesByRegionId(request.regionId(), pageable);
+        return list.map(this::toDto);
     }
 }

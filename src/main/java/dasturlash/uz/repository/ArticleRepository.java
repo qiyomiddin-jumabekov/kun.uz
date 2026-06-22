@@ -57,4 +57,6 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
             " and a.status = dasturlash.uz.enums.ArticleStatus.PUBLISHED" +
             " order by a.createdAt desc ")
     Page<ArticleShortInfoForArticleCategory> getArticlesByCategoryId(@Param("categoryId") Integer integer, Pageable pageable);
+
+    Page<Article> getArticlesByRegionId(Integer integer, Pageable pageable);
 }

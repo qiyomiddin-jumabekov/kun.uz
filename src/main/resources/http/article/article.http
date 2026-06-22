@@ -79,3 +79,12 @@ Content-Type: application/json
 {
   "categoryId": 1
 }
+
+### Get Articles By Region Id
+POST localhost:8081/article/get-by/region-id
+Authorization: Basic UVFROjAwMDA=
+Content-Type: application/json
+
+{
+  "regionId": 1
+}

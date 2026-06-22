@@ -62,4 +62,12 @@ public class ArticleController {
             @RequestParam(value = "page", defaultValue = "5") int page) {
         return ResponseEntity.ok(articleService.getArticlesByCategoryId(page, size, request));
     }
+
+    @PostMapping("/get-by/region-id")
+    public ResponseEntity<Page<ResponseDtoForArticle>> getArticlesByRegionId(
+            @RequestBody @Valid RequestGetArticlesByRegionId request,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "5") int size) {
+        return ResponseEntity.ok(articleService.getArticlesByRegionId(page, size, request));
+    }
 }
