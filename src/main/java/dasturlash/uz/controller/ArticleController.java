@@ -70,4 +70,10 @@ public class ArticleController {
             @RequestParam(value = "size", defaultValue = "5") int size) {
         return ResponseEntity.ok(articleService.getArticlesByRegionId(page, size, request));
     }
+
+    @GetMapping("/get-by-id/{id}")
+    public ResponseEntity<ResponseDtoForArticle> getArticleById(
+            @PathVariable String id) {
+        return ResponseEntity.ok(articleService.getArticleById(id));
+    }
 }

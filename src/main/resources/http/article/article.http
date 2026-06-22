@@ -88,3 +88,9 @@ Content-Type: application/json
 {
   "regionId": 1
 }
+
+### Get Article By Article Id
+GET localhost:8081/article/get-by-id/9fb4ae59-4d0b-49ec-befb-fd37c7c2e55a
+Authorization: Basic UVFROjAwMDA=
+
+

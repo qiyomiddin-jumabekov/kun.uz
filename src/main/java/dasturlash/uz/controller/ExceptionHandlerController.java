@@ -1,5 +1,6 @@
 package dasturlash.uz.controller;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -24,6 +25,13 @@ public class ExceptionHandlerController {
             errors.put(error.getField(), error.getDefaultMessage());
         });
 
+        return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Map<String, String>> handleValidation(ConstraintViolationException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error", ex.getMessage());
         return ResponseEntity.badRequest().body(errors);
     }
 }

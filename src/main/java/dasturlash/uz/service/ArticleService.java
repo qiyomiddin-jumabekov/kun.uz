@@ -134,4 +134,13 @@ public class ArticleService {
         Page<Article> list = articleRepository.getArticlesByRegionId(request.regionId(), pageable);
         return list.map(this::toDto);
     }
+
+    public ResponseDtoForArticle getArticleById(String id) {
+        if (id == null || id.isBlank()) {
+            throw new IllegalArgumentException("Article id is null or empty");
+        }
+        Article article = articleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Article Not Found"));
+        return toDto(article);
+    }
 }
