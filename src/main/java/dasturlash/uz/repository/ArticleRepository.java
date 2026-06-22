@@ -1,6 +1,5 @@
 package dasturlash.uz.repository;
 
-import dasturlash.uz.dto.article.ResponseDtoForArticle;
 import dasturlash.uz.entity.Article;
 import dasturlash.uz.enums.ArticleStatus;
 import dasturlash.uz.enums.Visible;
@@ -9,7 +8,6 @@ import dasturlash.uz.projections.article.ArticleShortInfoForArticleCategory;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleTag;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -79,9 +77,18 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
             " where asec.sectionId = :sectionId" +
             " and a.id <> :articleId" +
             " and a.status = dasturlash.uz.enums.ArticleStatus.PUBLISHED" +
-            " order by a.createdAt desc")
+            " order by a.createdAt desc" +
+            " limit 4")
     List<ArticleShortInfo> getLast4ArticlesBySectionId(
             @Param("sectionId") Integer sectionId,
-            @Param("articleId") String articleId,
-            Pageable pageable);
+            @Param("articleId") String articleId);
+
+    @Query("select a.id as id,a.title as title,a.content as content," +
+            " a.createdAt as createdAt,a.visible as visible" +
+            " from Article a " +
+            " where a.id <> ?1" +
+            " and a.status = dasturlash.uz.enums.ArticleStatus.PUBLISHED" +
+            " order by a.viewCount desc " +
+            " limit 4")
+    List<ArticleShortInfo> getTop4MostReadArticlesExceptId(String id);
 }

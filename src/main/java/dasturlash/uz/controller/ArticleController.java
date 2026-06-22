@@ -95,4 +95,10 @@ public class ArticleController {
             @PathVariable String articleId) {
         return ResponseEntity.ok(articleService.getLast4ArticlesBySectionId(sectionId, articleId));
     }
+
+    @GetMapping("/most-read/{articleId}")
+    public ResponseEntity<List<ArticleShortInfo>> getTop4MostReadArticlesExceptId(
+            @PathVariable String articleId) {
+        return ResponseEntity.ok(articleService.getTop4MostReadArticlesExceptId(articleId));
+    }
 }

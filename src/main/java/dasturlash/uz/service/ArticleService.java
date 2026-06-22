@@ -154,7 +154,10 @@ public class ArticleService {
     }
 
     public List<ArticleShortInfo> getLast4ArticlesBySectionId(Integer sectionId, String articleId) {
-        Pageable pageable = PageRequest.of(0, 4);
-        return articleRepository.getLast4ArticlesBySectionId(sectionId,articleId,pageable);
+        return articleRepository.getLast4ArticlesBySectionId(sectionId, articleId);
+    }
+
+    public List<ArticleShortInfo> getTop4MostReadArticlesExceptId(String articleId) {
+        return articleRepository.getTop4MostReadArticlesExceptId(articleId);
     }
 }
