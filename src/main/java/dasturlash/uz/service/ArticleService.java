@@ -171,4 +171,14 @@ public class ArticleService {
         articleRepository.increaseViewCount(articleId);
         return articleRepository.getArticleViewCount(articleId);
     }
+
+    @Transactional
+    public Integer increaseArticleShareCount(String articleId) {
+        boolean exists = articleRepository.existsById(articleId);
+        if (!exists) {
+            throw new IllegalArgumentException("Article Not Found");
+        }
+        articleRepository.increaseShareCount(articleId);
+        return articleRepository.getArticleShareCount(articleId);
+    }
 }

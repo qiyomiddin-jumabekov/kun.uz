@@ -100,4 +100,13 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
     @Query("select a.viewCount from Article a" +
             " where a.id = ?1")
     Integer getArticleViewCount(String articleId);
+
+    @Modifying
+    @Query("update Article a set a.sharedCount = a.sharedCount + 1" +
+            " where a.id = ?1")
+    void increaseShareCount(String articleId);
+
+    @Query("select a.sharedCount from Article a" +
+            " where a.id = ?1")
+    Integer getArticleShareCount(String articleId);
 }
