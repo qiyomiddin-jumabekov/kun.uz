@@ -1,0 +1,9 @@
+### Set emotion for Article
+POST localhost:8081/article-emotion
+Authorization: Basic UVFROjAwMDA=
+Content-Type: application/json
+
+{
+  "articleId": "11ec45c6-2ba9-410c-87ad-c9fd14b0a775",
+  "emotionType": "ARTICLE_LIKE"
+}
