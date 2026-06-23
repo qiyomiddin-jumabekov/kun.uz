@@ -1,0 +1,10 @@
+### Create Comment For Article
+POST localhost:8081/article-comment/create
+Authorization: Basic UVFROjAwMDA=
+Content-Type: application/json
+
+{
+  "articleId": "11ec45c6-2ba9-410c-87ad-c9fd14b0a775",
+  "content": "Ajoyib",
+  "replyId": 0
+}
