@@ -61,4 +61,17 @@ public class CommentService {
 
         return "Comment updated successfully";
     }
+
+    public boolean deleteComment(Integer commentId) {
+        Comment comment = commentRepository
+                .findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("Comment not found"));
+
+        Integer currentProfileId = SecurityUtil.getCurrentUserId();
+        if (!comment.getProfileId().equals(currentProfileId)) {
+            throw new IllegalArgumentException("You can only delete your own comment");
+        }
+        int result = commentRepository.changeVisibleOfComment(comment.getId(), Visible.INACTIVE);
+        return result >= 0;
+    }
 }
