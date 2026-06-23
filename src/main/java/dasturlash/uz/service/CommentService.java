@@ -80,6 +80,10 @@ public class CommentService {
 
     public List<CommentShortInfo> getRepliedCommentsByCommentId(Integer commentId) {
         Integer currentProfileId = SecurityUtil.getCurrentUserId();
-        return commentRepository.getRepliedComments(commentId,currentProfileId);
+        return commentRepository.getRepliedComments(commentId, currentProfileId);
+    }
+
+    public List<CommentShortInfo> getCommentsByArticleId(String articleId) {
+        return commentRepository.getCommentsByArticleId(articleId);
     }
 }

@@ -34,4 +34,9 @@ public class CommentController {
     public ResponseEntity<?> getRepliedByComment(@PathVariable Integer commentId) {
         return ResponseEntity.ok(commentService.getRepliedCommentsByCommentId(commentId));
     }
+
+    @GetMapping("/by/{articleId}")
+    public ResponseEntity<?> getCommentsByArticleId(@PathVariable String articleId) {
+        return ResponseEntity.ok(commentService.getCommentsByArticleId(articleId));
+    }
 }
