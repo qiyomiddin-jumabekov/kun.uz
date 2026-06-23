@@ -91,4 +91,13 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
             " order by a.viewCount desc " +
             " limit 4")
     List<ArticleShortInfo> getTop4MostReadArticlesExceptId(String id);
+
+    @Modifying
+    @Query("update Article a set a.viewCount = a.viewCount + 1 " +
+            " where a.id = ?1")
+    void increaseViewCount(String articleId);
+
+    @Query("select a.viewCount from Article a" +
+            " where a.id = ?1")
+    Integer getArticleViewCount(String articleId);
 }

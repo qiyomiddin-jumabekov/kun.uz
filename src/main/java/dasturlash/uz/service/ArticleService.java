@@ -10,6 +10,7 @@ import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleTag;
 import dasturlash.uz.repository.ArticleRepository;
 import dasturlash.uz.util.SecurityUtil;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -159,5 +160,15 @@ public class ArticleService {
 
     public List<ArticleShortInfo> getTop4MostReadArticlesExceptId(String articleId) {
         return articleRepository.getTop4MostReadArticlesExceptId(articleId);
+    }
+
+    @Transactional
+    public Integer increaseArticleViewCount(String articleId) {
+        boolean exists = articleRepository.existsById(articleId);
+        if (!exists) {
+            throw new IllegalArgumentException("Article Not Found");
+        }
+        articleRepository.increaseViewCount(articleId);
+        return articleRepository.getArticleViewCount(articleId);
     }
 }

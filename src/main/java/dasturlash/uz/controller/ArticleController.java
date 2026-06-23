@@ -101,4 +101,9 @@ public class ArticleController {
             @PathVariable String articleId) {
         return ResponseEntity.ok(articleService.getTop4MostReadArticlesExceptId(articleId));
     }
+
+    @GetMapping("/increase-count/{articleId}")
+    public ResponseEntity<Integer> increaseArticleViewCount(@PathVariable String articleId) {
+        return ResponseEntity.ok(articleService.increaseArticleViewCount(articleId));
+    }
 }
