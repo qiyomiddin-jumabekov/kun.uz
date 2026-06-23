@@ -2,7 +2,7 @@ package dasturlash.uz.repository;
 
 import dasturlash.uz.entity.Comment;
 import dasturlash.uz.enums.Visible;
-import dasturlash.uz.projections.article.CommentShortInfo;
+import dasturlash.uz.projections.comment.CommentShortInfo;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

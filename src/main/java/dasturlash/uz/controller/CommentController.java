@@ -1,10 +1,9 @@
 package dasturlash.uz.controller;
 
-import dasturlash.uz.dto.article.CreateCommentRequest;
+import dasturlash.uz.dto.comment.CreateCommentRequest;
 import dasturlash.uz.dto.article.UpdateCommentRequest;
 import dasturlash.uz.service.CommentService;
 import jakarta.validation.Valid;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package dasturlash.uz.projections.article;
+package dasturlash.uz.projections.comment;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

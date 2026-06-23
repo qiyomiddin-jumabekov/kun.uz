@@ -27,3 +27,8 @@ Authorization: Basic UVFROjAwMDA=
 ### Get Replied Comments of Comment
 GET localhost:8081/article-comment/get-replied-by/4
 Authorization: Basic UVFROjAwMDA=
+
+###
+5-method qoldi Commentdagi
+
+###

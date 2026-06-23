@@ -1,0 +1,9 @@
+### Create Emotion For Comment
+POST localhost:8081/comment-emotion/create
+Authorization: Basic UVFROjAwMDA=
+Content-Type: application/json
+
+{
+  "commentId": 1,
+  "reaction": "COMMENT_DISLIKE"
+}

@@ -1,10 +1,10 @@
 package dasturlash.uz.service;
 
-import dasturlash.uz.dto.article.CreateCommentRequest;
+import dasturlash.uz.dto.comment.CreateCommentRequest;
 import dasturlash.uz.dto.article.UpdateCommentRequest;
 import dasturlash.uz.entity.Comment;
 import dasturlash.uz.enums.Visible;
-import dasturlash.uz.projections.article.CommentShortInfo;
+import dasturlash.uz.projections.comment.CommentShortInfo;
 import dasturlash.uz.repository.ArticleRepository;
 import dasturlash.uz.repository.CommentRepository;
 import dasturlash.uz.util.SecurityUtil;
