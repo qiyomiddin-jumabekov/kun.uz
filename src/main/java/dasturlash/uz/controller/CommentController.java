@@ -24,6 +24,4 @@ public class CommentController {
     public ResponseEntity<?> updateComment(@RequestBody @Valid UpdateCommentRequest request) {
         return ResponseEntity.ok(commentService.updateComment(request));
     }
-
-
 }

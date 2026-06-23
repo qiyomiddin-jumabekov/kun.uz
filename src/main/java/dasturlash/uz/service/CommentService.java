@@ -1,6 +1,7 @@
 package dasturlash.uz.service;
 
 import dasturlash.uz.dto.article.CreateCommentRequest;
+import dasturlash.uz.dto.article.UpdateCommentRequest;
 import dasturlash.uz.entity.Comment;
 import dasturlash.uz.enums.Visible;
 import dasturlash.uz.repository.ArticleRepository;
@@ -39,5 +40,25 @@ public class CommentService {
         comment.setVisible(Visible.ACTIVE);
         commentRepository.save(comment);
         return "Comment Successfully created";
+    }
+
+    public String updateComment(UpdateCommentRequest request) {
+
+        Comment comment = commentRepository.findById(request.getCommentId())
+                .orElseThrow(() -> new IllegalArgumentException("Comment not found"));
+
+        Integer currentProfileId = SecurityUtil.getCurrentUserId();
+        if (!comment.getProfileId().equals(currentProfileId)) {
+            throw new IllegalArgumentException("You can only update your own comment");
+        }
+
+        if (!comment.getArticleId().equals(request.getArticleId())) {
+            throw new IllegalArgumentException("Article id mismatch");
+        }
+
+        comment.setContent(request.getContent());
+        commentRepository.save(comment);
+
+        return "Comment updated successfully";
     }
 }

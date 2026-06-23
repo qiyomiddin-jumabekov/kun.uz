@@ -8,3 +8,14 @@ Content-Type: application/json
   "content": "Ajoyib",
   "replyId": 0
 }
+
+### Update Comment For Article
+PUT localhost:8081/article-comment/update
+Authorization: Basic UVFROjAwMDA=
+Content-Type: application/json
+
+{
+  "commentId": 1,
+  "articleId": "11ec45c6-2ba9-410c-87ad-c9fd14b0a775",
+  "content": "Gap bo'lishi mumkin emas"
+}
