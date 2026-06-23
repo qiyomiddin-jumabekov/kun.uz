@@ -9,6 +9,7 @@ import dasturlash.uz.projections.article.ArticleShortInfoForArticleCategory;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleSection;
 import dasturlash.uz.projections.article.ArticleShortInfoForArticleTag;
 import dasturlash.uz.repository.ArticleRepository;
+import dasturlash.uz.specification.ArticleSpecification;
 import dasturlash.uz.util.SecurityUtil;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -180,5 +182,12 @@ public class ArticleService {
         }
         articleRepository.increaseShareCount(articleId);
         return articleRepository.getArticleShareCount(articleId);
+    }
+
+    public Page<ResponseDtoForArticle> filterDto(FilterDto filterDto, int page, int size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Specification<Article> spec = ArticleSpecification.filter(filterDto);
+        Page<Article> list = articleRepository.findAll(spec, pageable);
+        return list.map(this::toDto);
     }
 }

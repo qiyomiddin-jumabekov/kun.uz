@@ -117,3 +117,7 @@ Authorization: Basic UVFROjAwMDA=
 ### Increase Share Count of Article
 GET localhost:8081/article/increase-share-count/9fb4ae59-4d0b-49ec-befb-fd37c7c2e55a
 Authorization: Basic UVFROjAwMDA=
+
+### Get Articles By Filter
+GET localhost:8081/article/filter?title=Art
+Authorization: Basic UVFROjAwMDA=

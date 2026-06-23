@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -110,5 +111,24 @@ public class ArticleController {
     @GetMapping("/increase-share-count/{articleId}")
     public ResponseEntity<Integer> increaseArticleShareCount(@PathVariable String articleId) {
         return ResponseEntity.ok(articleService.increaseArticleShareCount(articleId));
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<?> filterArticles(
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "regionId", required = false) Integer regionId,
+            @RequestParam(value = "categoryId", required = false) Integer categoryId,
+            @RequestParam(value = "sectionId", required = false) Integer sectionId,
+            @RequestParam(value = "publishedDateFrom", required = false) LocalDateTime dateFrom,
+            @RequestParam(value = "publishedDateTo", required = false) LocalDateTime dateTo,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "5") int size) {
+        return ResponseEntity.ok(articleService.filterDto(new FilterDto(
+                        title,
+                        regionId,
+                        categoryId,
+                        sectionId,
+                        dateFrom,
+                        dateTo), page, size));
     }
 }
