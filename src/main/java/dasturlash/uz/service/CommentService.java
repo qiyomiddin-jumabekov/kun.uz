@@ -4,11 +4,14 @@ import dasturlash.uz.dto.article.CreateCommentRequest;
 import dasturlash.uz.dto.article.UpdateCommentRequest;
 import dasturlash.uz.entity.Comment;
 import dasturlash.uz.enums.Visible;
+import dasturlash.uz.projections.article.CommentShortInfo;
 import dasturlash.uz.repository.ArticleRepository;
 import dasturlash.uz.repository.CommentRepository;
 import dasturlash.uz.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CommentService {
@@ -73,5 +76,10 @@ public class CommentService {
         }
         int result = commentRepository.changeVisibleOfComment(comment.getId(), Visible.INACTIVE);
         return result >= 0;
+    }
+
+    public List<CommentShortInfo> getRepliedCommentsByCommentId(Integer commentId) {
+        Integer currentProfileId = SecurityUtil.getCurrentUserId();
+        return commentRepository.getRepliedComments(commentId,currentProfileId);
     }
 }

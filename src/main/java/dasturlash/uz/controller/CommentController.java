@@ -4,6 +4,7 @@ import dasturlash.uz.dto.article.CreateCommentRequest;
 import dasturlash.uz.dto.article.UpdateCommentRequest;
 import dasturlash.uz.service.CommentService;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,5 +29,10 @@ public class CommentController {
     @DeleteMapping("/delete/{commentId}")
     public ResponseEntity<?> deleteComment(@PathVariable Integer commentId) {
         return ResponseEntity.ok(commentService.deleteComment(commentId));
+    }
+
+    @GetMapping("/get-replied-by/{commentId}")
+    public ResponseEntity<?> getRepliedByComment(@PathVariable Integer commentId) {
+        return ResponseEntity.ok(commentService.getRepliedCommentsByCommentId(commentId));
     }
 }
